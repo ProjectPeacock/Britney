@@ -66,7 +66,7 @@ public class BlueCycleAuto extends LinearOpMode {
         initVuforia();
         initTfod();
         robot.init(hardwareMap);
-        robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+        robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         dashboard = FtcDashboard.getInstance();
         TelemetryPacket dashTelemetry = new TelemetryPacket();
 
@@ -159,7 +159,7 @@ public class BlueCycleAuto extends LinearOpMode {
                 .back(8)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{clawControl.moveLiftScore(0);})
                 .splineToSplineHeading(new Pose2d(36,-13.5,Math.toRadians(90)),Math.toRadians(220))
-                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoAlign.setPosition(robot.SERVO_ALIGN_AUTO_END);})
+                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoArm.setPosition(robot.SERVO_ARM_DUNK);})
                 .build();
 
         /*
@@ -178,7 +178,7 @@ public class BlueCycleAuto extends LinearOpMode {
         TrajectorySequence park1 = drive.trajectorySequenceBuilder(finalMid.end())
                 .strafeLeft(22)
                 .back(1.5)
-                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoAlign.setPosition(robot.SERVO_ALIGN_AUTO_END);})
+                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoArm.setPosition(robot.SERVO_ARM_DUNK);})
 
                 //.splineToSplineHeading(new Pose2d(12,-14,Math.toRadians(90)),Math.toRadians(180))
                 .build();
@@ -186,7 +186,7 @@ public class BlueCycleAuto extends LinearOpMode {
         TrajectorySequence park3 = drive.trajectorySequenceBuilder(finalMid.end())
                 .strafeRight(22)
                 .back(1.5)
-                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoAlign.setPosition(robot.SERVO_ALIGN_AUTO_END);})
+                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{robot.servoArm.setPosition(robot.SERVO_ARM_DUNK);})
 
                 //.splineToSplineHeading(new Pose2d(60,-14,Math.toRadians(90)),Math.toRadians(0))
                 .build();
@@ -233,8 +233,8 @@ public class BlueCycleAuto extends LinearOpMode {
         dashTelemetry.put("01 - IMU Angle X = ", robot.imu.getAngles()[0]);
         dashTelemetry.put("02 - IMU Angle Y = ", robot.imu.getAngles()[1]);
         dashTelemetry.put("03 - IMU Angle Z = ", robot.imu.getAngles()[2]);
-        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftFront.getCurrentPosition());
-        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRear.getCurrentPosition());
+        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
         dashTelemetry.put("06 - Claw Value = ", robot.servoGrabber.getPosition());
         dashTelemetry.put("07 - GP1.Button.A = ", "RESET LIFT");
         dashTelemetry.put("08 - GP1.Button.B = ", "LIFT LOW JUNCTION");

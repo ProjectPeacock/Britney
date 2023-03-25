@@ -5,7 +5,6 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -154,8 +153,8 @@ public class RedPreloadAuto extends LinearOpMode {
         dashTelemetry.put("01 - IMU Angle X = ", robot.imu.getAngles()[0]);
         dashTelemetry.put("02 - IMU Angle Y = ", robot.imu.getAngles()[1]);
         dashTelemetry.put("03 - IMU Angle Z = ", robot.imu.getAngles()[2]);
-        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftFront.getCurrentPosition());
-        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRear.getCurrentPosition());
+        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
         dashTelemetry.put("06 - Claw Value = ", robot.servoGrabber.getPosition());
         dashTelemetry.put("07 - GP1.Button.A = ", "RESET LIFT");
         dashTelemetry.put("08 - GP1.Button.B = ", "LIFT LOW JUNCTION");

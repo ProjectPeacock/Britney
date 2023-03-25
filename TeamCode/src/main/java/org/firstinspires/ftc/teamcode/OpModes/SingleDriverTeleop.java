@@ -4,13 +4,11 @@ package org.firstinspires.ftc.teamcode.OpModes;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
@@ -32,8 +30,8 @@ public class SingleDriverTeleop extends LinearOpMode {
         ButtonReader aReader = new ButtonReader(gp1, GamepadKeys.Button.A);
         ButtonReader bReader = new ButtonReader(gp1, GamepadKeys.Button.RIGHT_BUMPER);
 
-        robot.motorLiftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorLiftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorLiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorLiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         telemetry.addData("Ready to Run: ", "GOOD LUCK");
         telemetry.update();
@@ -113,9 +111,9 @@ public class SingleDriverTeleop extends LinearOpMode {
                 lift.closeClaw();
             }
 
-            if (gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > .1&&robot.motorLiftFront.getCurrentPosition()>0) {
+            if (gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > .1&&robot.motorLiftLeft.getCurrentPosition()>0) {
                 liftPower=-gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
-            }else if (gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > .1&&robot.motorLiftFront.getCurrentPosition()<robot.LIFT_HIGH){
+            }else if (gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > .1&&robot.motorLiftLeft.getCurrentPosition()<robot.LIFT_HIGH){
                 liftPower=Math.pow(gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER),2);
             }else{
                 liftPower=0.0;
@@ -124,10 +122,10 @@ public class SingleDriverTeleop extends LinearOpMode {
             lift.setLiftPow(liftPower);
 
             // Provide user feedback
-            telemetry.addData("Lift position front = ",robot.motorLiftFront.getCurrentPosition());
-            telemetry.addData("Lift position rear = ",robot.motorLiftRear.getCurrentPosition());
-            telemetry.addData("Lift velocity front:",robot.motorLiftFront.getVelocity());
-            telemetry.addData("Lift velocity rear:",robot.motorLiftRear.getVelocity());
+            telemetry.addData("Lift position front = ",robot.motorLiftLeft.getCurrentPosition());
+            telemetry.addData("Lift position rear = ",robot.motorLiftRight.getCurrentPosition());
+            telemetry.addData("Lift velocity front:",robot.motorLiftLeft.getVelocity());
+            telemetry.addData("Lift velocity rear:",robot.motorLiftRight.getVelocity());
             telemetry.addData("Lift power = ",liftPower);
             telemetry.addData("Claw open = ", clawToggle);
             telemetry.addData("Current tip = ",tip);

@@ -62,8 +62,8 @@ public class BrokenBot extends LinearOpMode {
         dashTelemetry.put("01 - IMU Angle X = ", robot.imu.getAngles()[0]);
         dashTelemetry.put("02 - IMU Angle Y = ", robot.imu.getAngles()[1]);
         dashTelemetry.put("03 - IMU Angle Z = ", robot.imu.getAngles()[2]);
-        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftFront.getCurrentPosition());
-        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRear.getCurrentPosition());
+        dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+        dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
         dashTelemetry.put("06 - Claw Value = ", robot.servoGrabber.getPosition());
         dashTelemetry.put("07 - GP1.Button.A = ", "RESET LIFT");
         dashTelemetry.put("08 - GP1.Button.B = ", "LIFT LOW JUNCTION");
@@ -78,11 +78,11 @@ public class BrokenBot extends LinearOpMode {
         while (opModeIsActive()) {
 
 
-            telemetry.addData("Servo Align = ", robot.servoAlign.getPosition());
+            telemetry.addData("Servo Align = ", robot.servoArm.getPosition());
             if (gamepad2.left_bumper) {
-                robot.servoAlign.setPosition(robot.SERVO_ALIGN_DOWN);
+                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             } else if (gamepad2.right_bumper){
-                robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+                robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
             }
 
             if (gamepad2.right_trigger>0.1) {
@@ -138,18 +138,18 @@ public class BrokenBot extends LinearOpMode {
 
             liftPosition = Range.clip(liftPosition, robot.LIFT_BOTTOM, robot.MAX_LIFT_VALUE);
 
-            robot.motorLiftFront.setTargetPosition(liftPosition);
-            robot.motorLiftRear.setTargetPosition(liftPosition);
-            robot.motorLiftFront.setPower(liftPower);
-            robot.motorLiftRear.setPower(liftPower);
+            robot.motorLiftLeft.setTargetPosition(liftPosition);
+            robot.motorLiftRight.setTargetPosition(liftPosition);
+            robot.motorLiftLeft.setPower(liftPower);
+            robot.motorLiftRight.setPower(liftPower);
 
             // Provide user feedback
             telemetry.addData("A:", "Lift Reset");
             telemetry.addData("B:", "Lift Low");
             telemetry.addData("X:", "Lift Mid");
             telemetry.addData("Y:", "Lift High");
-            telemetry.addData("Lift Front Encoder Value = ", robot.motorLiftFront.getCurrentPosition());
-            telemetry.addData("Lift Rear Encoder Value = ", robot.motorLiftRear.getCurrentPosition());
+            telemetry.addData("Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+            telemetry.addData("Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
             telemetry.addData("IMU Angle X = ", robot.imu.getAngles()[0]);
             telemetry.addData("IMU Angle Y = ", robot.imu.getAngles()[1]);
             telemetry.addData("IMU Angle Z = ", robot.imu.getAngles()[2]);
@@ -163,8 +163,8 @@ public class BrokenBot extends LinearOpMode {
             dashTelemetry.put("01 - IMU Angle X = ", robot.imu.getAngles()[0]);
             dashTelemetry.put("02 - IMU Angle Y = ", robot.imu.getAngles()[1]);
             dashTelemetry.put("03 - IMU Angle Z = ", robot.imu.getAngles()[2]);
-            dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftFront.getCurrentPosition());
-            dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRear.getCurrentPosition());
+            dashTelemetry.put("04 - Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+            dashTelemetry.put("05 - Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
             dashTelemetry.put("06 - Claw Value = ", robot.servoGrabber.getPosition());
             dashTelemetry.put("07 - GP1.Button.A = ", "RESET LIFT");
             dashTelemetry.put("08 - GP1.Button.B = ", "LIFT LOW JUNCTION");
@@ -176,8 +176,8 @@ public class BrokenBot extends LinearOpMode {
             dashTelemetry.put("14 - motorLR encoder = ", robot.motorLR.getCurrentPosition());
             dashTelemetry.put("15 - motorRF encoder = ", robot.motorRF.getCurrentPosition());
             dashTelemetry.put("16 - motorRR encoder = ", robot.motorRR.getCurrentPosition());
-            dashTelemetry.put("17 - motorLiftFront position = ", robot.motorLiftFront.getCurrentPosition());
-            dashTelemetry.put("18 - motorLiftRear position = ", robot.motorLiftFront.getCurrentPosition());
+            dashTelemetry.put("17 - motorLiftFront position = ", robot.motorLiftLeft.getCurrentPosition());
+            dashTelemetry.put("18 - motorLiftRear position = ", robot.motorLiftLeft.getCurrentPosition());
             dashTelemetry.put("19 - L/R Odometer = ",robot.motorRR.getCurrentPosition());
             dashTelemetry.put("20 - F/B Odometer = ",robot.motorLF.getCurrentPosition());
             dashboard.sendTelemetryPacket(dashTelemetry);

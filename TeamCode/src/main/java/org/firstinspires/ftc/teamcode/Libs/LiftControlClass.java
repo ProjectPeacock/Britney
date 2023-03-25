@@ -26,13 +26,13 @@ public class LiftControlClass {
      *  -   reset the lift to starting position
      */
     public void setLiftPow(double pow){
-        robot.motorLiftFront.setPower(pow);
-        robot.motorLiftRear.setPower(pow);
+        robot.motorLiftLeft.setPower(pow);
+        robot.motorLiftRight.setPower(pow);
     }
     public void runTo(int pos){
         setLiftPow(params.liftPow);
-        robot.motorLiftFront.setTargetPosition(pos);
-        robot.motorLiftRear.setTargetPosition(pos);
+        robot.motorLiftLeft.setTargetPosition(pos);
+        robot.motorLiftRight.setTargetPosition(pos);
         //robot.motorLiftRear.setTargetPosition(pos-params.diffConstant);
     }
 
@@ -45,16 +45,16 @@ public class LiftControlClass {
     public void moveLiftScore(int pos){
         if(pos==0){
             runTo(robot.LIFT_BOTTOM);
-            robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+            robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         }else if(pos==1){
             runTo(robot.LIFT_LOW);
-            robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+            robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         }else if(pos==2){
             runTo(robot.LIFT_MID);
-            robot.servoAlign.setPosition(robot.SERVO_ALIGN_DOWN);
+            robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
         }else if(pos==3){
             runTo(robot.LIFT_HIGH);
-            robot.servoAlign.setPosition(robot.SERVO_ALIGN_DOWN);
+            robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
         }
     }
 
@@ -88,11 +88,11 @@ public class LiftControlClass {
     //claw control methods
     public void openClaw(){
         robot.servoGrabber.setPosition(robot.CLAW_OPEN);
-        robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+        robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
     }
     public void closeClaw(){
         robot.servoGrabber.setPosition(robot.CLAW_CLOSE);
     }
-    public void lowerAligner(){robot.servoAlign.setPosition(robot.SERVO_ALIGN_DOWN);}
+    public void lowerAligner(){robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);}
     public void disableClaw(){robot.servoGrabber.setPwmDisable();}
 }   // close the AutoClass class

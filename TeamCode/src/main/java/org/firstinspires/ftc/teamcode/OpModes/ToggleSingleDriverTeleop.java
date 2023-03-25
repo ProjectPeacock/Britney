@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode.OpModes;
 
 
+import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.hardware.lynx.LynxModule;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -42,12 +41,14 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
         boolean clawToggle=false, clawReady=false, slowToggle=false, slowReady=false, toggleReadyUp=false, toggleReadyDown=false, alignAdjustReady=false, alignerToggle=false;
         boolean antiTip=true;
         double forwardPower=0, strafePower=0, turnPower=0;
+        double liftPower=0;
 
-        int liftPos=0, bumpCount=0,offset=0;
+        int liftPos=0, bumpCount=0,offset=0,trueLiftPos=0;
 
+        PIDFController liftPIDF = new PIDFController(robot.kP, robot.kI, robot.kD, robot.kF);
 
         waitForStart();
-        robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
+        robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         double startTilt=robot.imu.getAngles()[robot.ANTI_TIP_AXIS], currentTilt=0, tip=0;
 
         for (LynxModule hub : allHubs) {
@@ -183,12 +184,16 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
             //apply lift positions
             if (bumpCount == 0) {
                 liftPos = robot.LIFT_BOTTOM+offset;
+                robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
             } else if (bumpCount == 1) {
                 liftPos = robot.LIFT_LOW+offset;
+                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             } else if (bumpCount == 2) {
                 liftPos = robot.LIFT_MID+offset;
+                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             } else if (bumpCount == 3) {
                 liftPos = robot.LIFT_HIGH+offset;
+                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             }
 
             //adjust lift position
@@ -201,15 +206,12 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
             liftPos=Range.clip(liftPos,2,robot.MAX_LIFT_VALUE);
 
 
-            lift.runTo(liftPos);
+            trueLiftPos=robot.motorLiftLeft.getCurrentPosition();
+            liftPower=liftPIDF.calculate(trueLiftPos,liftPos);
+            liftPower+=(Math.cos(Math.toRadians(liftPos/robot.liftTicks))*robot.kF);
+            robot.motorLiftLeft.setPower(liftPower);
+            robot.motorLiftRight.setPower(liftPower);
 
-            if(!gp1.isDown(GamepadKeys.Button.Y)) {
-                if (robot.motorLiftFront.getCurrentPosition() > robot.ALIGNER_UP_THRESHOLD && !clawToggle) {
-                    robot.servoAlign.setPosition(robot.SERVO_ALIGN_DOWN);
-                }
-            }else{
-                robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
-            }
 
             if(runTime.time() > 90&&runTime.time()<90.25){
                 gamepad1.rumble(50);
@@ -232,7 +234,7 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
             // Provide user feedback
             //telemetry.addData("lift position = ", robot.liftEncoder.getPosition());
             telemetry.addData("Lift Position = ", liftPos);
-            telemetry.addData("Lift power = ",robot.motorLiftFront.getPower());
+            telemetry.addData("Lift power = ",robot.motorLiftLeft.getPower());
             telemetry.addData("Claw open = ", clawToggle);
             telemetry.addData("Current tip = ",tip);
             telemetry.addData("IMU Angles X = ", robot.imu.getAngles()[0]);

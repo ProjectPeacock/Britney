@@ -2,31 +2,33 @@ package org.firstinspires.ftc.teamcode.Hardware;
 
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.RevIMU;
-import com.arcrobotics.ftclib.hardware.ServoEx;
-import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
-import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class HWProfile {
     //constants
     public final boolean fieldCentric=true;
 
+    //lift PIDF coefficients
+    public final double kP=0;
+    public final double kI=0;
+    public final double kD=0;
+    public final double kF=0;
+
+    public final double liftTicks=8192/360.0;
+
     //aligner constants
     public final int ALIGNER_UP_THRESHOLD=600;
     // servo align positions
-    public final double SERVO_ALIGN_UP = 0.7;
-    public final double SERVO_ALIGN_DOWN = 0.1;
-    public final double SERVO_ALIGN_AUTO_END = 0.85;
+    public final double SERVO_ARM_INTAKE = 0;
+    public final double SERVO_ARM_SCORE = 0.5;
+    public final double SERVO_ARM_DUNK = 0.75;
 
     //tflite file name
     public final String tfliteFileName = "PP_Generic_SS.tflite";
@@ -75,13 +77,17 @@ public class HWProfile {
     public MotorEx motorLR = null;
     public MotorEx motorRF = null;
     public MotorEx motorRR = null;
-    public DcMotorEx motorLiftFront = null;
-    public DcMotorEx motorLiftRear = null;
+    public DcMotorEx motorLiftLeft = null;
+    public DcMotorEx motorLiftRight = null;
     public RevIMU imu = null;
     public ServoImplEx servoGrabber = null;
-    public ServoImplEx servoAlign = null;
+    public ServoImplEx servoArm = null;
+    public ServoImplEx servoFlipperLeft;
+    public ServoImplEx servoFlipperRight;
     public MecanumDrive mecanum = null;
     public MotorEx autoLight = null;
+    public RevBlinkinLedDriver blinkin = null;
+    public RevBlinkinLedDriver.BlinkinPattern pattern = null;
 
     /* local OpMode members. */
     HardwareMap hwMap =  null;
@@ -121,20 +127,16 @@ public class HWProfile {
         mecanum = new MecanumDrive(motorLF, motorRF, motorLR, motorRR);
 
         //lift motors init
-        motorLiftFront = hwMap.get(DcMotorEx.class, "motorLiftFront");
-        motorLiftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftFront.setTargetPosition(0);
-        motorLiftFront.setTargetPositionTolerance(10);
-        motorLiftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftLeft = hwMap.get(DcMotorEx.class, "motorLiftLeft");
+        motorLiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        motorLiftRear = hwMap.get(DcMotorEx.class, "motorLiftRear");
-        motorLiftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftRear.setTargetPosition(0);
-        motorLiftRear.setTargetPositionTolerance(rearLiftMotorTol);
-        motorLiftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftRight = hwMap.get(DcMotorEx.class, "motorLiftRight");
+        motorLiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // rev color sensor
-        sensorColor = hwMap.get(RevColorSensorV3.class, "servoColor");
+        sensorColor = hwMap.get(RevColorSensorV3.class, "sensorColor");
 
         //light init
         autoLight = new MotorEx(ahwMap, "sideSideOdo", 8192,10000);
@@ -142,7 +144,15 @@ public class HWProfile {
 
         //init servos
         servoGrabber = hwMap.get(ServoImplEx.class, "servoGrabber");
-        servoAlign = hwMap.get(ServoImplEx.class, "servoAlign");
+        servoArm = hwMap.get(ServoImplEx.class, "servoAlign");
+        servoFlipperLeft = hwMap.get(ServoImplEx.class, "servoFlipperLeft");
+        servoFlipperRight = hwMap.get(ServoImplEx.class, "servoFlipperRight");
+
+        //init blinkin
+
+        blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+        blinkin.setPattern(pattern);
 
         //init imu
         imu = new RevIMU(ahwMap);
