@@ -46,7 +46,7 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
     // UNITS ARE METERS
     double tagsize = 0.166;
 
-    int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
+    int ID_TAG_OF_INTEREST = 1; // Tag ID 1 from the 36h11 family
 
     AprilTagDetection tagOfInterest = null;
 
@@ -71,7 +71,7 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
     //init params
     AutoParams params = new AutoParams();
 
-    double parkPosition = 2;
+    int parkPosition = 2;
 
     @Override
     public void runOpMode() {
@@ -273,7 +273,6 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
 
         robot.autoLight.set(0);
         if(isStopRequested()) return;
-
         //score preload
         drive.followTrajectorySequence(untilCycle);
         drive.followTrajectorySequence(cycleMid1);
@@ -285,8 +284,10 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
             drive.followTrajectorySequence(cycleHigh);
         }
         */
+        if (myOpmode.time < 5){
+            drive.followTrajectorySequence(finalMid);
+        }
 
-        drive.followTrajectorySequence(finalMid);
 
         if(parkPosition==1){
             drive.followTrajectorySequence(park1);
