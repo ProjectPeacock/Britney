@@ -26,9 +26,9 @@ public class HWProfile {
     //aligner constants
     public final int ALIGNER_UP_THRESHOLD=600;
     // servo align positions
-    public final double SERVO_ARM_INTAKE = 0;
-    public final double SERVO_ARM_SCORE = 0.5;
-    public final double SERVO_ARM_DUNK = 0.75;
+    public final double SERVO_ARM_INTAKE = 1;
+    public final double SERVO_ARM_SCORE = 0.05;
+    public final double SERVO_ARM_DUNK = 0.05;
 
     //tflite file name
     public final String tfliteFileName = "PP_Generic_SS.tflite";
@@ -144,7 +144,7 @@ public class HWProfile {
 
         //init servos
         servoGrabber = hwMap.get(ServoImplEx.class, "servoGrabber");
-        servoArm = hwMap.get(ServoImplEx.class, "servoAlign");
+        servoArm = hwMap.get(ServoImplEx.class, "servoArm");
         servoFlipperLeft = hwMap.get(ServoImplEx.class, "servoFlipperLeft");
         servoFlipperRight = hwMap.get(ServoImplEx.class, "servoFlipperRight");
 

@@ -51,7 +51,8 @@ import java.util.ArrayList;
         double cy = 221.506;
 
         // UNITS ARE METERS
-        double tagsize = 0.166;
+//        double tagsize = 0.166;
+        double tagsize = 0.03;
 
         int ID_TAG_OF_INTEREST = 18; // Tag ID 18 from the 36h11 family
 

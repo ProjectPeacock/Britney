@@ -31,6 +31,8 @@ public class BrokenBot extends LinearOpMode {
     public static int l6_LIFT_BOTTOM = robot.LIFT_BOTTOM;
     public static double l7_LIFT_POWER = robot.LIFT_POW;
     public static double l8_TURN_MULTIPLIER = robot.TURN_MULTIPLIER;
+    public static double l9_ARM_INTAKE=robot.SERVO_ARM_INTAKE;
+    public static double l10_ARM_SCORE=robot.SERVO_ARM_SCORE;
 
     @Override
     public void runOpMode() {
@@ -43,6 +45,8 @@ public class BrokenBot extends LinearOpMode {
         TelemetryPacket dashTelemetry = new TelemetryPacket();
 
         robot.init(hardwareMap);
+        robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
+        robot.servoGrabber.setPosition(robot.CLAW_OPEN);
         GamepadEx gp1 = new GamepadEx(gamepad1);
         GamepadEx gp2 = new GamepadEx(gamepad2);
         ButtonReader clawToggleButton = new ButtonReader(gp1, GamepadKeys.Button.RIGHT_BUMPER);
@@ -56,7 +60,7 @@ public class BrokenBot extends LinearOpMode {
         List<LynxModule> allHubs = hardwareMap.getAll(LynxModule.class);
 
         double liftPower=0;
-        boolean clawToggle=false, clawReady=false;
+        boolean clawToggle=false, clawReady=false, armToggle=false, armReady=false;
 
         // post telemetry to FTC Dashboard as well
         dashTelemetry.put("01 - IMU Angle X = ", robot.imu.getAngles()[0]);
@@ -96,6 +100,7 @@ public class BrokenBot extends LinearOpMode {
                 robot.mecanum.driveRobotCentric(gp1.getLeftX(),gp1.getLeftY(),-gp1.getRightX()*l8_TURN_MULTIPLIER, true);
             }
 
+
             if(clawToggleButton.isDown()&&clawReady){
                 clawToggle=!clawToggle;
             }
@@ -104,10 +109,27 @@ public class BrokenBot extends LinearOpMode {
             }else{
                 clawReady=false;
             }
-            if (clawToggle) {
+
+            if (!clawToggle) {
                 robot.servoGrabber.setPosition(l1_CLAW_OPEN);
             } else {
                 robot.servoGrabber.setPosition(l2_CLAW_CLOSE);
+            }
+
+
+            if(gp1.getButton(GamepadKeys.Button.LEFT_BUMPER)&&armReady){
+                armToggle=!armToggle;
+            }
+            if(!gp1.getButton(GamepadKeys.Button.LEFT_BUMPER)){
+                armReady=true;
+            }else{
+                armReady=false;
+            }
+
+            if (armToggle) {
+                robot.servoArm.setPosition(l9_ARM_INTAKE);
+            } else {
+                robot.servoArm.setPosition(l10_ARM_SCORE);
             }
 
             if (gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.1) {
