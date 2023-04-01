@@ -172,8 +172,8 @@ public class BrokenBot extends LinearOpMode {
             telemetry.addData("B:", "Lift Low");
             telemetry.addData("X:", "Lift Mid");
             telemetry.addData("Y:", "Lift High");
-            telemetry.addData("Lift Front Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
-            telemetry.addData("Lift Rear Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
+            telemetry.addData("Lift Left Encoder Value = ", robot.motorLiftLeft.getCurrentPosition());
+            telemetry.addData("Lift Right Encoder Value = ", robot.motorLiftRight.getCurrentPosition());
             telemetry.addData("IMU Angle X = ", robot.imu.getAngles()[0]);
             telemetry.addData("IMU Angle Y = ", robot.imu.getAngles()[1]);
             telemetry.addData("IMU Angle Z = ", robot.imu.getAngles()[2]);
