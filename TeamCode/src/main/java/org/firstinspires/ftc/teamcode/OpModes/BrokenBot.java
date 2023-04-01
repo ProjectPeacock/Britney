@@ -47,6 +47,8 @@ public class BrokenBot extends LinearOpMode {
         robot.init(hardwareMap);
         robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         robot.servoGrabber.setPosition(robot.CLAW_OPEN);
+        robot.servoFlipperLeft.setPosition(0);
+        robot.servoFlipperRight.setPosition(1);
         GamepadEx gp1 = new GamepadEx(gamepad1);
         GamepadEx gp2 = new GamepadEx(gamepad2);
         ButtonReader clawToggleButton = new ButtonReader(gp1, GamepadKeys.Button.RIGHT_BUMPER);
