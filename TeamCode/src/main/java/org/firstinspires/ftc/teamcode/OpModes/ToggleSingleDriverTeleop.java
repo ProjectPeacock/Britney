@@ -184,16 +184,12 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
             //apply lift positions
             if (bumpCount == 0) {
                 liftPos = robot.LIFT_BOTTOM+offset;
-                robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
             } else if (bumpCount == 1) {
                 liftPos = robot.LIFT_LOW+offset;
-                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             } else if (bumpCount == 2) {
                 liftPos = robot.LIFT_MID+offset;
-                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             } else if (bumpCount == 3) {
                 liftPos = robot.LIFT_HIGH+offset;
-                robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
             }
 
             //adjust lift position
@@ -205,12 +201,18 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
 
             liftPos=Range.clip(liftPos,2,robot.MAX_LIFT_VALUE);
 
+            lift.runTo(liftPos);
 
-            trueLiftPos=robot.motorLiftLeft.getCurrentPosition();
-            liftPower=liftPIDF.calculate(trueLiftPos,liftPos);
-            liftPower+=(Math.cos(Math.toRadians(liftPos/robot.liftTicks))*robot.kF);
-            robot.motorLiftLeft.setPower(liftPower);
-            robot.motorLiftRight.setPower(liftPower);
+
+            if(!gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)) {
+                if (robot.motorLiftLeft.getCurrentPosition() > robot.ARM_THRESHOLD && !clawToggle) {
+                    robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
+                }
+            }else{
+                robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
+            }
+
+
 
 
             if(runTime.time() > 90&&runTime.time()<90.25){
@@ -233,7 +235,10 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
 
             // Provide user feedback
             //telemetry.addData("lift position = ", robot.liftEncoder.getPosition());
-            telemetry.addData("Lift Position = ", liftPos);
+            telemetry.addData("Lift Target Position = ", liftPos);
+            telemetry.addData("Lift Left Position = ", robot.motorLiftLeft.getCurrentPosition());
+            telemetry.addData("Lift Right Position = ", robot.motorLiftRight.getCurrentPosition());
+            telemetry.addData("Arm Target Postion =", robot.servoArm.getPosition());
             telemetry.addData("Lift power = ",robot.motorLiftLeft.getPower());
             telemetry.addData("Claw open = ", clawToggle);
             telemetry.addData("Current tip = ",tip);

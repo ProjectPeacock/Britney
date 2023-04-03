@@ -8,6 +8,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
@@ -24,7 +25,7 @@ public class HWProfile {
     public final double liftTicks=8192/360.0;
 
     //aligner constants
-    public final int ALIGNER_UP_THRESHOLD=600;
+    public final int ARM_THRESHOLD =208;
     // servo align positions
     public final double SERVO_ARM_INTAKE = 1;
     public final double SERVO_ARM_SCORE = 0.05;
@@ -37,8 +38,8 @@ public class HWProfile {
     public final int rearLiftMotorTol = 8;
 
     //claw positions
-    public final double CLAW_OPEN =0.3;
-    public final double CLAW_CLOSE =0.65;
+    public final double CLAW_OPEN =0.65;
+    public final double CLAW_CLOSE =0.3;
     public final double CLAW_BEACON=0.4;
 
 
@@ -57,11 +58,11 @@ public class HWProfile {
     //lift constants
     final public int liftAdjust=15;
     final public double LIFT_POW=1;
-    final public int MAX_LIFT_VALUE = 1200;
+    final public int MAX_LIFT_VALUE = 715;
     final public int LIFT_BOTTOM=0;
-    final public int LIFT_LOW=525;
-    final public int LIFT_MID=815;
-    final public int LIFT_HIGH=1150;
+    final public int LIFT_LOW=247;
+    final public int LIFT_MID=475;
+    final public int LIFT_HIGH=700;
 
     final private int liftTicksPerInch=38;
     final public int stack1=(int)5.25*liftTicksPerInch;
@@ -129,11 +130,16 @@ public class HWProfile {
         //lift motors init
         motorLiftLeft = hwMap.get(DcMotorEx.class, "motorLiftLeft");
         motorLiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorLiftLeft.setPower(0);
+        motorLiftLeft.setTargetPosition(0);
+        motorLiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         motorLiftRight = hwMap.get(DcMotorEx.class, "motorLiftRight");
         motorLiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorLiftRight.setPower(0);
+        motorLiftRight.setTargetPosition(0);
+        motorLiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // rev color sensor
         sensorColor = hwMap.get(RevColorSensorV3.class, "sensorColor");

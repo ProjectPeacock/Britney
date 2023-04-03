@@ -24,8 +24,8 @@ import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 @TeleOp(name = "Lift Test", group = "Competition")
 //@Disabled
 public class LiftTest extends LinearOpMode {
-    public MotorEx motorLiftFront = null;
-    public MotorEx motorLiftRear = null;
+    public DcMotorEx motorLiftLeft = null;
+    public DcMotorEx motorLiftRight = null;
     public MotorGroup winch = null;
     FtcDashboard dashboard;
     //public MotorGroup winch = null;
@@ -49,82 +49,34 @@ public class LiftTest extends LinearOpMode {
         int lastPosition=0;
 
         //lift motor init
-        //motorLiftFront = new MotorEx(hardwareMap, "motorLiftFront", Motor.GoBILDA.RPM_1150);
-        //motorLiftRear = new MotorEx(hardwareMap, "motorLiftRear", Motor.GoBILDA.RPM_1150);
-        motorLiftFront = new MotorEx(hardwareMap,"motorLiftFront", Motor.GoBILDA.RPM_1150);
-        motorLiftRear = new MotorEx(hardwareMap,"motorLiftRear", Motor.GoBILDA.RPM_1150);
+        motorLiftLeft = hardwareMap.get(DcMotorEx.class, "motorLiftLeft");
+        motorLiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        winch = new MotorGroup(motorLiftFront,motorLiftRear);
-        winch.setRunMode(Motor.RunMode.PositionControl);
-        winch.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-        winch.setPositionCoefficient(LIFT_KP);
-        winch.setPositionTolerance(LIFT_TOL);
-        winch.resetEncoder();
+        motorLiftRight = hardwareMap.get(DcMotorEx.class, "motorLiftRight");
+        motorLiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorLiftRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         telemetry.addData("Ready to Run: ", "GOOD LUCK");
         telemetry.update();
 
-        dashTelemetry.put("01 - Lift Target Position ", liftPos);
-        dashTelemetry.put("02 - Winch Motor Positions", winch.getPositions());
-        dashTelemetry.put("03 - Lift Power = ", liftPower);
-        dashTelemetry.put("04 - GP1.Button.A = ", "RESET LIFT");
-        dashTelemetry.put("05 - GP1.Button.B = ", "LIFT LOW JUNCTION");
-        dashTelemetry.put("06 - GP1.Button.X = ", "LIFT MID JUNCTION");
-        dashTelemetry.put("07 - GP1.Button.Y = ", "LIFT HIGH JUNCTION");
-        dashboard.sendTelemetryPacket(dashTelemetry);
-
         waitForStart();
 
         while (opModeIsActive()) {
-            winch.setPositionTolerance(LIFT_TOL);
-            winch.setPositionCoefficient(LIFT_KP);
-
-            if(gamepad1.a){
-                liftPos=LIFT_BOTTOM;
+            if(gamepad1.left_trigger>0.1){
+                motorLiftLeft.setPower(-gamepad1.left_trigger);
+                motorLiftRight.setPower(-gamepad1.left_trigger);
+            }else if(gamepad1.right_trigger>0.1){
+                motorLiftLeft.setPower(gamepad1.right_trigger);
+                motorLiftRight.setPower(gamepad1.right_trigger);
+            }else{
+                motorLiftLeft.setPower(0);
+                motorLiftRight.setPower(0);
             }
 
-            if(gamepad1.b){
-                liftPos=LIFT_LOW;
-            }
-
-            if(gamepad1.x){
-                liftPos=LIFT_MID;
-            }
-
-            if(gamepad1.y){
-                liftPos=LIFT_HIGH;
-            }
-
-            winch.set(0);
-            winch.setTargetPosition(liftPos);
-            while(!winch.atTargetPosition()) {
-//                winch.setTargetPosition(liftPos);
-                if (liftPos > lastPosition) {
-                    winch.set(LIFT_POW_UP);
-                } else {
-                    winch.set(LIFT_POW_DOWN);
-                }
-            }
-            winch.stopMotor();
-
-            // Provide user feedback
-            dashTelemetry.put("01 - Lift Target Position ", liftPos);
-            dashTelemetry.put("02 - Winch Motor Positions", winch.getPositions());
-            dashTelemetry.put("03 - Winch KP", winch.getPositionCoefficient());
-            dashTelemetry.put("04 - GP1.Button.A = ", "RESET LIFT");
-            dashTelemetry.put("05 - GP1.Button.B = ", "LIFT LOW JUNCTION");
-            dashTelemetry.put("06 - GP1.Button.X = ", "LIFT MID JUNCTION");
-            dashTelemetry.put("07 - GP1.Button.Y = ", "LIFT HIGH JUNCTION");
-            dashboard.sendTelemetryPacket(dashTelemetry);
-
-            telemetry.addData("Lift Target Pos: ",liftPos);
-            telemetry.addData("Winch Motor Positions: ",winch.getPositions());
-            telemetry.addData("Winch KP: ",winch.getPositionCoefficient());
-            telemetry.addData("GP1.Button.A: ","RESET LIFT");
-            telemetry.addData("GP1.Button.B: ","LIFT LOW JUNCTION");
-            telemetry.addData("GP1.Button.X: ","LIFT MID JUNCTION");
-            telemetry.addData("GP1.Button.Y: ","LIFT HIGH JUNCTION");
+            telemetry.addData("Left motor posiition: ",motorLiftLeft.getCurrentPosition());
+            telemetry.addData("Right motor position: ",motorLiftRight.getCurrentPosition());
             telemetry.update();
         }   // end of while(opModeIsActive)
     }   // end of runOpMode()
