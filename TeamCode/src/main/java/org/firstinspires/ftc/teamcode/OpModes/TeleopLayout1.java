@@ -17,9 +17,9 @@ import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 
 import java.util.List;
 
-@TeleOp(name = "Super Secret Teleop, DO NOT RUN!", group = "Competition")
+@TeleOp(name = "Teleop Layout 1", group = "Competition")
 //@Disabled
-public class ToggleSingleDriverTeleop extends LinearOpMode {
+public class TeleopLayout1 extends LinearOpMode {
     private final static HWProfile robot = new HWProfile();
 
     @Override
@@ -29,8 +29,6 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
         LiftControlClass lift = new LiftControlClass(robot,myOpmode);
 
         GamepadEx gp1 = new GamepadEx(gamepad1);
-        ButtonReader aReader = new ButtonReader(gp1, GamepadKeys.Button.A);
-        ButtonReader bReader = new ButtonReader(gp1, GamepadKeys.Button.DPAD_RIGHT);
 
         telemetry.addData("Ready to Run: ", "GOOD LUCK");
         telemetry.update();
@@ -38,13 +36,11 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
         List<LynxModule> allHubs = hardwareMap.getAll(LynxModule.class);
         ElapsedTime runTime = new ElapsedTime();
 
-        boolean clawToggle=false, clawReady=false, toggleReadyUp=false, toggleReadyDown=false, alignAdjustReady=false, alignerToggle=false;
+        boolean clawToggle=false, clawReady=false, toggleReadyUp=false, toggleReadyDown=false, alignAdjustReady=false, armToggle=false, armOverrideReady = false, armOverride=false;
         boolean antiTip=true;
         double forwardPower=0, strafePower=0, turnPower=0;
-        double liftPower=0;
 
-        int liftPos=0, bumpCount=0,offset=0,trueLiftPos=0;
-
+        int liftPos=0, bumpCount=0,offset=0;
 
         waitForStart();
         robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
@@ -58,11 +54,8 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
         runTime.reset();
 
         while (opModeIsActive()) {
-            //rumble if cone detected in claw AND if claw is open
-            if(robot.sensorColor.getDistance(DistanceUnit.CM)<3&&clawToggle){
-                gamepad1.rumble(1,1,50);
-            }
 
+            //DRIVE CONTROL SECTION//
             //drive power input from analog sticks
             forwardPower=gp1.getLeftY();
             strafePower=gp1.getLeftX();
@@ -84,8 +77,7 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
                 }
             }
 
-
-            //mecanum drive setups
+            //FTCLib drive code, instantiated in HWProfile
             if(robot.fieldCentric){
                 //field centric setup
                 robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);
@@ -93,15 +85,16 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
                 //robot centric setup
                 robot.mecanum.driveRobotCentric(strafePower,forwardPower,-turnPower, true);
             }
+            //END OF DRIVE CONTROL SECTION//
 
 
-            //claw control
-            if(aReader.isDown()&&clawReady){
+            //CLAW CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.A)&&clawReady){
                 clawToggle=!clawToggle;
             }
 
             //forces claw to only open or close if button is pressed once, not held
-            if(!aReader.isDown()){
+            if(!gp1.isDown(GamepadKeys.Button.A)){
                 clawReady=true;
             }else{
                 clawReady=false;
@@ -109,15 +102,50 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
 
             //apply value to claw
             if (clawToggle) {
-                //robot.servoAlign.setPosition(robot.SERVO_ALIGN_UP);
                 lift.openClaw();
             } else if(!clawToggle){
                 lift.closeClaw();
             }else if(gp1.isDown(GamepadKeys.Button.Y)){
                 robot.servoGrabber.setPosition(robot.CLAW_BEACON);
             }
+            //END OF CLAW CONTROL SECTION//
 
-            //lift toggles
+            //ARM CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)&&armOverrideReady){
+                armOverride=!armOverride;
+            }
+
+            //checks for arm button being held down
+            if(!gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)){
+                armOverrideReady=true;
+            }else{
+                armOverrideReady=false;
+            }
+
+            //change armToggle based on lift position
+            if(bumpCount>0){
+                armToggle=true;
+            }else{
+                armToggle=false;
+            }
+
+            if (bumpCount==0){
+                armOverride=false;
+            }
+
+            //apply value to arm
+            if(!armOverride) {
+                if (armToggle) {
+                    lift.armScore();
+                } else {
+                    lift.armIntake();
+                }
+            }else{
+                lift.armIntake();
+            }
+            //END OF ARM CONTROL SECTION//
+
+            //LIFT CONTROL SECTION//
             if(!gp1.isDown(GamepadKeys.Button.RIGHT_BUMPER)){
                 toggleReadyUp=true;
             }
@@ -130,6 +158,7 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
                 bumpCount=0;
                 offset=0;
                 liftPos= robot.LIFT_BOTTOM;
+                armOverride=false;
             }
 
             //increase lift position
@@ -140,7 +169,7 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
                     bumpCount++;
                 }
 
-            //increase lift position
+            //decrease lift position
             }else if(gp1.getButton(GamepadKeys.Button.LEFT_BUMPER)&&toggleReadyDown){
                 offset=0;
                 toggleReadyDown=false;
@@ -149,12 +178,13 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
                 }
             }
 
-            if(!gp1.isDown(GamepadKeys.Button.X)){
-                alignAdjustReady=true;
+            //move lift down to score
+            if(gp1.isDown(GamepadKeys.Button.X)&&alignAdjustReady){
+                offset+=800;
             }
 
-            if(gp1.isDown(GamepadKeys.Button.X)&&alignAdjustReady){
-                offset-=75;
+            if(!gp1.isDown(GamepadKeys.Button.X)){
+                alignAdjustReady=true;
             }
 
             //apply lift positions
@@ -170,46 +200,51 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
 
             //adjust lift position
             if(gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.5){
-                offset+= robot.liftAdjust;
-            }else if(gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.5){
                 offset-= robot.liftAdjust;
+            }else if(gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.5){
+                offset += robot.liftAdjust;
             }
 
+            //clip lift position to proper range (encoder counts in reverse so clip is negative)
             liftPos=Range.clip(liftPos,robot.MAX_LIFT_VALUE,2);
 
+            //set lift target and run PID
             lift.runTo(liftPos);
+            //END OF LIFT CONTROL SECTION//
 
-
-            if(!gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)) {
-                if (robot.lift.getPositions().get(0) < robot.ARM_THRESHOLD && !clawToggle) {
-                    robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);
-                }
+            //FLIPPER CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.Y)){
+                lift.flippersDown();
             }else{
-                robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
+                lift.flippersUp();
+            }
+            //END OF FLIPPER CONTROL SECTION//
+
+
+            //DRIVER FEEDBACK SECTION//
+            //rumble if cone detected in claw AND if claw is open
+            if(robot.sensorColor.getDistance(DistanceUnit.CM)<3&&clawToggle){
+                gamepad1.rumble(1,1,50);
             }
 
-
-
-
+            //Rumble controller for endgame and flash controller light red
             if(runTime.time() > 90&&runTime.time()<90.25){
                 gamepad1.rumble(50);
                 gamepad1.setLedColor(255,0,0,50);
             }
-
             if(runTime.time() > 91&&runTime.time()<91.25){
                 gamepad1.rumble(50);
                 gamepad1.setLedColor(255,0,0,50);
             }
-
             if(runTime.time() > 92&&runTime.time()<92.25){
                 gamepad1.rumble(50);
                 gamepad1.setLedColor(255,0,0,50);
             }
-            if(runTime.time() > 93) {
-                gamepad1.setLedColor(255, 0, 0, 30000);
+            if(runTime.time() > 93) {gamepad1.setLedColor(255, 0, 0, 30000);
             }
+            //END OF DRIVER FEEDBACK SECTION//
 
-            // Provide user feedback
+            //TELEMETRY//
             //telemetry.addData("lift position = ", robot.liftEncoder.getPosition());
             telemetry.addData("Lift Target Position = ", liftPos);
             telemetry.addData("Lift Position = ", robot.lift.getPositions().get(0));
@@ -219,9 +254,8 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
             telemetry.addData("IMU Angles X = ", robot.imu.getAngles()[0]);
             telemetry.addData("IMU Angles Y = ", robot.imu.getAngles()[1]);
             telemetry.addData("IMU Angles Z = ", robot.imu.getAngles()[2]);
-//            telemetry.addData("Inches traveled forward/backward ", robot.forwardBackwardOdo.getCurrentPosition()/(2*Math.PI*0.7480314960629921)); //taken from odometry, long number is wheel radius in inches
-//            telemetry.addData("Inches traveled side/side ", robot.sideSideOdo.getCurrentPosition()/(2*Math.PI*0.7480314960629921));
             telemetry.update();
+            //END OF TELEMETRY//
 
         }   // end of while(opModeIsActive)
     }   // end of runOpMode()

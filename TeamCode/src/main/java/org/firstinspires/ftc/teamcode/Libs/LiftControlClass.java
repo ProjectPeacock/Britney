@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.Libs;
+import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
@@ -10,6 +11,7 @@ public class LiftControlClass {
     public int cyclesRun=0;
     AutoParams params = new AutoParams();
 
+
     /*
      * Constructor method
      */
@@ -18,22 +20,20 @@ public class LiftControlClass {
         robot = myRobot;
         opMode = myOpMode;
 
-    }   // close AutoClass constructor Method
+    }   // close LiftControlClass constructor Method
 
 
     /**
      * Method: liftReset
      *  -   reset the lift to starting position
      */
-    public void setLiftPow(double pow){
-        robot.motorLiftLeft.setPower(pow);
-        robot.motorLiftRight.setPower(pow);
-    }
-    public void runTo(int pos){
-        setLiftPow(params.liftPow);
-        robot.motorLiftLeft.setTargetPosition(pos);
-        robot.motorLiftRight.setTargetPosition(pos);
-        //robot.motorLiftRear.setTargetPosition(pos-params.diffConstant);
+    public void runTo(int target){
+        robot.lift.setTargetPosition(target);
+        if(!robot.lift.atTargetPosition()){
+            robot.lift.set(1);
+        }else{
+            robot.lift.set(0);
+        }
     }
 
     //method for moving lift to score and retract
@@ -85,14 +85,15 @@ public class LiftControlClass {
         cyclesRun++;
     }
 
-    //claw control methods
-    public void openClaw(){
-        robot.servoGrabber.setPosition(robot.CLAW_OPEN);
-        robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
-    }
+    //mechanism control methods
+    public void openClaw(){robot.servoGrabber.setPosition(robot.CLAW_OPEN);}
     public void closeClaw(){
         robot.servoGrabber.setPosition(robot.CLAW_CLOSE);
     }
+    public void armIntake(){robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);}
+    public void armScore(){robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);}
     public void lowerAligner(){robot.servoArm.setPosition(robot.SERVO_ARM_SCORE);}
+    public void flippersUp(){robot.servoFlipperLeft.setPosition(robot.SERVO_FLIPPER_UP);robot.servoFlipperRight.setPosition(1-robot.SERVO_FLIPPER_UP);}
+    public void flippersDown(){robot.servoFlipperLeft.setPosition(robot.SERVO_FLIPPER_DOWN);robot.servoFlipperRight.setPosition(1-robot.SERVO_FLIPPER_DOWN);}
     public void disableClaw(){robot.servoGrabber.setPwmDisable();}
 }   // close the AutoClass class

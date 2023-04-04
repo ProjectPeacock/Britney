@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,20 +17,14 @@ public class HWProfile {
     //constants
     public final boolean fieldCentric=true;
 
-    //lift PIDF coefficients
-    public final double kP=0;
-    public final double kI=0;
-    public final double kD=0;
-    public final double kF=0;
+    //servo flipper positions
+    public final double SERVO_FLIPPER_DOWN=0.25;
+    public final double SERVO_FLIPPER_UP=0;
 
-    public final double liftTicks=8192/360.0;
-
-    //aligner constants
-    public final int ARM_THRESHOLD =208;
-    // servo align positions
-    public final double SERVO_ARM_INTAKE = 1;
-    public final double SERVO_ARM_SCORE = 0.05;
-    public final double SERVO_ARM_DUNK = 0.05;
+    // servo arm positions
+    public final double SERVO_ARM_INTAKE = 0.92;
+    public final double SERVO_ARM_SCORE = 0.0;
+    public final double SERVO_ARM_DUNK = 0.0;
 
     //tflite file name
     public final String tfliteFileName = "PP_Generic_SS.tflite";
@@ -43,10 +38,6 @@ public class HWProfile {
     public final double CLAW_BEACON=0.4;
 
 
-    //odometer positions
-    public final double ODO_UP=0.25;
-    public final double ODO_DOWN=0.95;
-
     //drive constants
     public final double TURN_MULTIPLIER = 0.75;
 
@@ -56,13 +47,14 @@ public class HWProfile {
     public final int ANTI_TIP_AXIS=1;
 
     //lift constants
-    final public int liftAdjust=15;
+    final public int liftAdjust=700;
     final public double LIFT_POW=1;
-    final public int MAX_LIFT_VALUE = 715;
-    final public int LIFT_BOTTOM=0;
-    final public int LIFT_LOW=247;
-    final public int LIFT_MID=475;
-    final public int LIFT_HIGH=700;
+    final public int MAX_LIFT_VALUE = -56000;
+    public final int ARM_THRESHOLD =-15600;
+    final public int LIFT_BOTTOM=-750;
+    final public int LIFT_LOW=-20350;
+    final public int LIFT_MID=-38300;
+    final public int LIFT_HIGH=-55000;
 
     final private int liftTicksPerInch=38;
     final public int stack1=(int)5.25*liftTicksPerInch;
@@ -78,8 +70,9 @@ public class HWProfile {
     public MotorEx motorLR = null;
     public MotorEx motorRF = null;
     public MotorEx motorRR = null;
-    public DcMotorEx motorLiftLeft = null;
-    public DcMotorEx motorLiftRight = null;
+    private MotorEx motorLiftLeft = null;
+    private MotorEx motorLiftRight = null;
+    public MotorGroup lift = null;
     public RevIMU imu = null;
     public ServoImplEx servoGrabber = null;
     public ServoImplEx servoArm = null;
@@ -128,18 +121,16 @@ public class HWProfile {
         mecanum = new MecanumDrive(motorLF, motorRF, motorLR, motorRR);
 
         //lift motors init
-        motorLiftLeft = hwMap.get(DcMotorEx.class, "motorLiftLeft");
-        motorLiftLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftLeft.setPower(0);
-        motorLiftLeft.setTargetPosition(0);
-        motorLiftLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLiftLeft = new MotorEx(ahwMap, "motorLiftLeft", 8192,6000);
+        motorLiftRight = new MotorEx(ahwMap, "motorLiftRight", 8192,6000);
 
-        motorLiftRight = hwMap.get(DcMotorEx.class, "motorLiftRight");
-        motorLiftRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLiftRight.setPower(0);
-        motorLiftRight.setTargetPosition(0);
-        motorLiftRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorLiftRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        lift = new MotorGroup(motorLiftLeft,motorLiftRight);
+        lift.setRunMode(Motor.RunMode.PositionControl);
+        lift.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);;
+        lift.resetEncoder();
+        lift.setPositionTolerance(50);
+        lift.setPositionCoefficient(0.00025);
+
 
         // rev color sensor
         sensorColor = hwMap.get(RevColorSensorV3.class, "sensorColor");
