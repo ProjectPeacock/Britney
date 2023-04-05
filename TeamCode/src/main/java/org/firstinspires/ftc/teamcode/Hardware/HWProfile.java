@@ -33,7 +33,7 @@ public class HWProfile {
     public final int rearLiftMotorTol = 8;
 
     //claw positions
-    public final double CLAW_OPEN =0.65;
+    public final double CLAW_OPEN =0.55;
     public final double CLAW_CLOSE =0.3;
     public final double CLAW_BEACON=0.4;
 

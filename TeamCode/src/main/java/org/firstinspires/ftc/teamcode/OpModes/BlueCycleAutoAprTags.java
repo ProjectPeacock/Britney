@@ -110,7 +110,7 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
         TrajectorySequence untilCycle = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 .waitSeconds(0.125)
-                .UNSTABLE_addTemporalMarkerOffset(0.65,()->{clawControl.lowerAligner();})
+//               .UNSTABLE_addTemporalMarkerOffset(0.65,()->{clawControl.lowerAligner();})
                 .UNSTABLE_addTemporalMarkerOffset(0.65,()->{clawControl.moveLiftScore(2);})
                 .splineTo(new Vector2d(preloadX,preloadY),Math.toRadians(120))
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{clawControl.moveLiftScore(2,75);})
@@ -283,9 +283,9 @@ public class BlueCycleAutoAprTags extends LinearOpMode {
             drive.followTrajectorySequence(cycleHigh);
         }
         */
-        if (myOpmode.time < 5){
+ //       if (myOpmode.time < 5){
             drive.followTrajectorySequence(finalMid);
-        }
+//        }
 
 
         if(parkPosition==1){
