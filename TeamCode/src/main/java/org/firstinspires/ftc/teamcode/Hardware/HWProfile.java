@@ -49,12 +49,12 @@ public class HWProfile {
     //lift constants
     final public int liftAdjust=700;
     final public double LIFT_POW=1;
-    final public int MAX_LIFT_VALUE = -56000;
+    final public int MAX_LIFT_VALUE = -57500;
     public final int ARM_THRESHOLD =-15600;
     final public int LIFT_BOTTOM=-750;
     final public int LIFT_LOW=-20350;
     final public int LIFT_MID=-38300;
-    final public int LIFT_HIGH=-55000;
+    final public int LIFT_HIGH=-56000;
 
     final private int liftTicksPerInch=38;
     final public int stack1=(int)5.25*liftTicksPerInch;
@@ -128,7 +128,7 @@ public class HWProfile {
         lift.setRunMode(Motor.RunMode.PositionControl);
         lift.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);;
         lift.resetEncoder();
-        lift.setPositionTolerance(50);
+        lift.setPositionTolerance(25);
         lift.setPositionCoefficient(0.00025);
 
 
