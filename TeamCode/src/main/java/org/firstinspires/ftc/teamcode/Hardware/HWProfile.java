@@ -18,7 +18,7 @@ public class HWProfile {
     public final boolean fieldCentric=true;
 
     //servo flipper positions
-    public final double SERVO_FLIPPER_DOWN=0.25;
+    public final double SERVO_FLIPPER_DOWN=0.4;
     public final double SERVO_FLIPPER_UP=0;
 
     // servo arm positions
