@@ -34,7 +34,7 @@ public class HWProfile {
 
     //claw positions
     public final double CLAW_OPEN =0.55;
-    public final double CLAW_CLOSE =0.3;
+    public final double CLAW_CLOSE =0.2;
     public final double CLAW_BEACON=0.4;
 
 
@@ -47,7 +47,7 @@ public class HWProfile {
     public final int ANTI_TIP_AXIS=1;
 
     //lift constants
-    final public int liftAdjust=700;
+    final public int liftAdjust=750;
     final public double LIFT_POW=1;
     final public int MAX_LIFT_VALUE = -57500;
     public final int ARM_THRESHOLD =-15600;
@@ -56,11 +56,12 @@ public class HWProfile {
     final public int LIFT_MID=-38300;
     final public int LIFT_HIGH=-56000;
 
-    final private int liftTicksPerInch=38;
-    final public int stack1=(int)5.25*liftTicksPerInch;
-    final public int stack2=(int)3.75*liftTicksPerInch;
-    final public int stack3=(int)3*liftTicksPerInch;
-    final public int stack4=(int)0.75*liftTicksPerInch;
+    //final private int liftTicksPerInch= (int) 8192/4.3267;
+    final public int liftTicksPerInch= 1893;
+    final public int stack1=(int)-5.25*liftTicksPerInch;
+    final public int stack2=(int)-3.75*liftTicksPerInch;
+    final public int stack3=(int)-3*liftTicksPerInch;
+    final public int stack4=(int)-0.75*liftTicksPerInch;
 
     public RevColorSensorV3 sensorColor;
     //public OpticalDistanceSensor sensorDistance;
