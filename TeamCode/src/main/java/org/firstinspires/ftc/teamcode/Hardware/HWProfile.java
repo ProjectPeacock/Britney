@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 import com.arcrobotics.ftclib.hardware.RevIMU;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
@@ -16,6 +17,13 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 public class HWProfile {
     //constants
     public final boolean fieldCentric=true;
+
+    //lift PID constants
+    public final double kP=0.001;
+    public final double kI=0;
+    public final double kD=0;
+    public final double kF=-0.2;
+    public final double ticks_in_degrees = 8192/360;
 
     //servo flipper positions
     public final double SERVO_FLIPPER_DOWN=0.4;
@@ -51,10 +59,10 @@ public class HWProfile {
     final public double LIFT_POW=1;
     final public int MAX_LIFT_VALUE = -57500;
     public final int ARM_THRESHOLD =-15600;
-    final public int LIFT_BOTTOM=-750;
-    final public int LIFT_LOW=-20350;
-    final public int LIFT_MID=-38300;
-    final public int LIFT_HIGH=-56000;
+    final public int LIFT_BOTTOM=-350;
+    final public int LIFT_LOW=-21000;
+    final public int LIFT_MID=-40000;
+    final public int LIFT_HIGH=-57000;
 
     //final private int liftTicksPerInch= (int) 8192/4.3267;
     final public int liftTicksPerInch= 1893;
@@ -71,7 +79,7 @@ public class HWProfile {
     public MotorEx motorLR = null;
     public MotorEx motorRF = null;
     public MotorEx motorRR = null;
-    private MotorEx motorLiftLeft = null;
+    public MotorEx motorLiftLeft = null;
     private MotorEx motorLiftRight = null;
     public MotorGroup lift = null;
     public RevIMU imu = null;
@@ -83,6 +91,7 @@ public class HWProfile {
     public MotorEx autoLight = null;
     public RevBlinkinLedDriver blinkin = null;
     public RevBlinkinLedDriver.BlinkinPattern pattern = null;
+    public PIDController liftController = null;
 
     /* local OpMode members. */
     HardwareMap hwMap =  null;
@@ -126,12 +135,8 @@ public class HWProfile {
         motorLiftRight = new MotorEx(ahwMap, "motorLiftRight", 8192,6000);
 
         lift = new MotorGroup(motorLiftLeft,motorLiftRight);
-        lift.setRunMode(Motor.RunMode.PositionControl);
         lift.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);;
         lift.resetEncoder();
-        lift.setPositionTolerance(500);
-        lift.setPositionCoefficient(0.025);
-
 
         // rev color sensor
         sensorColor = hwMap.get(RevColorSensorV3.class, "sensorColor");
@@ -155,5 +160,9 @@ public class HWProfile {
         //init imu
         imu = new RevIMU(ahwMap);
         imu.init();
+
+        //lift PID init
+        liftController = new PIDController(kP,kI,kD);
+        liftController.setPID(kP,kI,kD);
     }
 }  // end of HWProfile Class

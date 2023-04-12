@@ -54,6 +54,7 @@ public class TeleopLayout1 extends LinearOpMode {
         runTime.reset();
 
         while (opModeIsActive()) {
+            lift.runTo(liftPos);
 
             //DRIVE CONTROL SECTION//
             //drive power input from analog sticks
@@ -206,7 +207,7 @@ public class TeleopLayout1 extends LinearOpMode {
             }
 
             //clip lift position to proper range (encoder counts in reverse so clip is negative)
-            liftPos=Range.clip(liftPos,robot.MAX_LIFT_VALUE,2);
+            liftPos=Range.clip(liftPos,robot.MAX_LIFT_VALUE,-50);
 
             //set lift target and run PID
             lift.runTo(liftPos);

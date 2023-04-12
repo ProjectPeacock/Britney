@@ -27,12 +27,12 @@ public class AutoLiftControlClass {
      *  -   reset the lift to starting position
      */
     public void runTo(int target){
-        robot.lift.setTargetPosition(target);
-        if(!robot.lift.atTargetPosition()){
-            robot.lift.set(1);
-        }else{
-            robot.lift.set(0);
-        }
+        int armPos = robot.motorLiftLeft.getCurrentPosition();
+
+        double pid = robot.liftController.calculate(armPos, target);
+        double ff = Math.cos(Math.toRadians((target/robot.ticks_in_degrees)))*robot.kF;
+
+        robot.lift.set(pid+ff);
     }
 
     //method for moving lift to score and retract
