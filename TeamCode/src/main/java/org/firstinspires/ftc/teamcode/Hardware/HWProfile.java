@@ -129,8 +129,8 @@ public class HWProfile {
         lift.setRunMode(Motor.RunMode.PositionControl);
         lift.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);;
         lift.resetEncoder();
-        lift.setPositionTolerance(25);
-        lift.setPositionCoefficient(0.00025);
+        lift.setPositionTolerance(500);
+        lift.setPositionCoefficient(0.025);
 
 
         // rev color sensor
