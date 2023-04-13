@@ -26,7 +26,7 @@ public class TeleopLayout1 extends LinearOpMode {
     public void runOpMode() {
         robot.init(hardwareMap);
         LinearOpMode myOpmode= this;
-        LiftControlClass lift = new LiftControlClass(robot,myOpmode);
+        LiftControlClass lift = new LiftControlClass(robot);
 
         GamepadEx gp1 = new GamepadEx(gamepad1);
 
@@ -50,11 +50,15 @@ public class TeleopLayout1 extends LinearOpMode {
             hub.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
+        int armPos = 0;
+        double pid = 0, ff = 0;
+
+        robot.lift.set(pid+ff);
+
 
         runTime.reset();
 
         while (opModeIsActive()) {
-            lift.runTo(liftPos);
 
             //DRIVE CONTROL SECTION//
             //drive power input from analog sticks
@@ -210,7 +214,12 @@ public class TeleopLayout1 extends LinearOpMode {
             liftPos=Range.clip(liftPos,robot.MAX_LIFT_VALUE,-50);
 
             //set lift target and run PID
-            lift.runTo(liftPos);
+            armPos = robot.motorLiftLeft.getCurrentPosition();
+
+            pid = robot.liftController.calculate(armPos, liftPos);
+            ff = Math.cos(Math.toRadians((liftPos/robot.ticks_in_degrees)))*robot.kF;
+
+            robot.lift.set(pid+ff);
             //END OF LIFT CONTROL SECTION//
 
             //FLIPPER CONTROL SECTION//

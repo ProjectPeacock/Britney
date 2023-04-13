@@ -42,7 +42,7 @@ public class RedPreloadAuto extends LinearOpMode {
     //lift control init
     public final static HWProfile robot = new HWProfile();
     private LinearOpMode myOpmode=this;
-    LiftControlClass clawControl = new LiftControlClass(robot,myOpmode);
+    LiftControlClass clawControl = new LiftControlClass(robot);
 
     //init params
     AutoParams params = new AutoParams();

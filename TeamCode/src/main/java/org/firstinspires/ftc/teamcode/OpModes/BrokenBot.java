@@ -53,7 +53,7 @@ public class BrokenBot extends LinearOpMode {
         GamepadEx gp2 = new GamepadEx(gamepad2);
         ButtonReader clawToggleButton = new ButtonReader(gp1, GamepadKeys.Button.RIGHT_BUMPER);
 
-        LiftControlClass drive = new LiftControlClass(robot, opMode);
+        LiftControlClass drive = new LiftControlClass(robot);
 
         telemetry.addData("Ready to Run: ", "GOOD LUCK");
         telemetry.update();

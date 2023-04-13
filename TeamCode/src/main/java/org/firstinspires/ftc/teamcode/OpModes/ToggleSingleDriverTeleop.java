@@ -27,7 +27,7 @@ public class ToggleSingleDriverTeleop extends LinearOpMode {
     public void runOpMode() {
         robot.init(hardwareMap);
         LinearOpMode myOpmode= this;
-        LiftControlClass lift = new LiftControlClass(robot,myOpmode);
+        LiftControlClass lift = new LiftControlClass(robot);
 
         GamepadEx gp1 = new GamepadEx(gamepad1);
         ButtonReader aReader = new ButtonReader(gp1, GamepadKeys.Button.A);

@@ -19,7 +19,7 @@ public class HWProfile {
     public final boolean fieldCentric=true;
 
     //lift PID constants
-    public final double kP=0.001;
+    public final double kP=0.0015;
     public final double kI=0;
     public final double kD=0;
     public final double kF=-0.2;

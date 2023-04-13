@@ -16,9 +16,9 @@ public class LiftControlClass {
      * Constructor method
      */
 
-    public LiftControlClass(HWProfile myRobot, OpMode myOpMode){
+    public LiftControlClass(HWProfile myRobot){
         robot = myRobot;
-        opMode = myOpMode;
+//        opMode = myOpMode;
 
     }   // close LiftControlClass constructor Method
 
