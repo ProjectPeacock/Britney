@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
+import org.firstinspires.ftc.teamcode.Libs.LiftControlThread;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class TeleopLayoutCTS extends LinearOpMode {
         robot.init(hardwareMap);
         LinearOpMode myOpmode= this;
         LiftControlClass lift = new LiftControlClass(robot);
+        LiftControlThread liftPosition;
 
         GamepadEx gp1 = new GamepadEx(gamepad1);
 
@@ -39,6 +41,12 @@ public class TeleopLayoutCTS extends LinearOpMode {
         double forwardPower=0, strafePower=0, turnPower=0;
 
         int liftPos=0, bumpCount=0,offset=0;
+
+        //Create and start GlobalCoordinatePosition thread to constantly update the global coordinate positions
+        liftPosition = new LiftControlThread(robot);
+        Thread positionThread = new Thread(liftPosition);
+        positionThread.start();
+
 
         waitForStart();
         robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
@@ -57,6 +65,99 @@ public class TeleopLayoutCTS extends LinearOpMode {
         runTime.reset();
 
         while (opModeIsActive()) {
+
+            //DRIVE CONTROL SECTION//
+            //drive power input from analog sticks
+            forwardPower=gp1.getLeftY();
+            strafePower=gp1.getLeftX();
+            if(gp1.getRightX()<0.75){
+                turnPower=Math.pow(gp1.getRightX(),2)*0.75*robot.TURN_MULTIPLIER;
+            }else{
+                turnPower=gp1.getRightX()*robot.TURN_MULTIPLIER;
+            }
+
+            /**
+             //anti-tip "algorithm"
+             if(antiTip){
+             currentTilt=robot.imu.getAngles()[robot.ANTI_TIP_AXIS];
+             tip = Math.abs(currentTilt-startTilt);
+             //if robot is tipped more than tolerance, multiply drive power by adjustment
+             if(tip>robot.ANTI_TIP_TOL*2){
+             forwardPower*=-1;
+             }else if(tip>robot.ANTI_TIP_TOL){
+             forwardPower*=robot.ANTI_TIP_ADJ;
+             }
+             }
+             **/
+
+            //FTCLib drive code, instantiated in HWProfile
+            if(robot.fieldCentric){
+                //field centric setup
+                robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);
+            }else{
+                //robot centric setup
+                robot.mecanum.driveRobotCentric(strafePower,forwardPower,-turnPower, true);
+            }
+            //END OF DRIVE CONTROL SECTION//
+
+
+            //CLAW CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.A)&&clawReady){
+                clawToggle=!clawToggle;
+            }
+
+            //forces claw to only open or close if button is pressed once, not held
+            if(!gp1.isDown(GamepadKeys.Button.A)){
+                clawReady=true;
+            }else{
+                clawReady=false;
+            }
+
+            //apply value to claw
+            if (clawToggle) {
+                lift.openClaw();
+            } else if(!clawToggle){
+                lift.closeClaw();
+            }else if(gp1.isDown(GamepadKeys.Button.Y)){
+                robot.servoGrabber.setPosition(robot.CLAW_BEACON);
+            }
+            //END OF CLAW CONTROL SECTION//
+
+            //ARM CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)&&armOverrideReady){
+                armOverride=!armOverride;
+            }
+
+            //checks for arm button being held down
+            if(!gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)){
+                armOverrideReady=true;
+            }else{
+                armOverrideReady=false;
+            }
+
+            //change armToggle based on lift position
+            if(bumpCount>0){
+                armToggle=true;
+            }else{
+                armToggle=false;
+            }
+
+            if (bumpCount==0){
+                armOverride=false;
+            }
+
+            //apply value to arm
+            if(!armOverride) {
+                if (armToggle) {
+                    lift.armScore();
+                } else {
+                    lift.armIntake();
+                }
+            }else{
+                lift.armIntake();
+            }
+            //END OF ARM CONTROL SECTION//
+
 
             //LIFT CONTROL SECTION//
             if(!gp1.isDown(GamepadKeys.Button.RIGHT_BUMPER)){
@@ -111,14 +212,58 @@ public class TeleopLayoutCTS extends LinearOpMode {
             liftPos=Range.clip(liftPos,robot.MAX_LIFT_VALUE,-50);
 
             //set lift target and run PID
-            armPos = robot.motorLiftLeft.getCurrentPosition();
+            liftPosition.setLiftPos(liftPos);
 
-            pid = robot.liftController.calculate(armPos, liftPos);
-            ff = Math.cos(Math.toRadians((liftPos/robot.ticks_in_degrees)))*robot.kF;
-
-            robot.lift.set(pid+ff);
             //END OF LIFT CONTROL SECTION//
 
+
+            //FLIPPER CONTROL SECTION//
+            if(gp1.isDown(GamepadKeys.Button.Y)){
+                lift.flippersDown();
+            }else{
+                lift.flippersUp();
+            }
+            //END OF FLIPPER CONTROL SECTION//
+
+
+            //DRIVER FEEDBACK SECTION//
+            //rumble if cone detected in claw AND if claw is open
+            if(robot.sensorColor.getDistance(DistanceUnit.CM)<3&&clawToggle){
+                gamepad1.rumble(1,1,50);
+            }
+
+            //Rumble controller for endgame and flash controller light red
+            if(runTime.time() > 90&&runTime.time()<90.25){
+                gamepad1.rumble(50);
+                gamepad1.setLedColor(255,0,0,50);
+            }
+            if(runTime.time() > 91&&runTime.time()<91.25){
+                gamepad1.rumble(50);
+                gamepad1.setLedColor(255,0,0,50);
+            }
+            if(runTime.time() > 92&&runTime.time()<92.25){
+                gamepad1.rumble(50);
+                gamepad1.setLedColor(255,0,0,50);
+            }
+            if(runTime.time() > 93) {gamepad1.setLedColor(255, 0, 0, 30000);
+            }
+            //END OF DRIVER FEEDBACK SECTION//
+
+            //TELEMETRY//
+            //telemetry.addData("lift position = ", robot.liftEncoder.getPosition());
+            telemetry.addData("Lift Target Position = ", liftPos);
+            telemetry.addData("Lift Position = ", robot.lift.getPositions().get(0));
+            telemetry.addData("Arm Target Postion =", robot.servoArm.getPosition());
+            telemetry.addData("Claw open = ", clawToggle);
+            telemetry.addData("Current tip = ",tip);
+            telemetry.addData("IMU Angles X = ", robot.imu.getAngles()[0]);
+            telemetry.addData("IMU Angles Y = ", robot.imu.getAngles()[1]);
+            telemetry.addData("IMU Angles Z = ", robot.imu.getAngles()[2]);
+            telemetry.update();
+            //END OF TELEMETRY//
+
         }   // end of while(opModeIsActive)
+        liftPosition.shutdown();
+
     }   // end of runOpMode()
 }

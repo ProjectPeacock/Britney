@@ -70,6 +70,7 @@ public class TeleopLayout1 extends LinearOpMode {
                 turnPower=gp1.getRightX()*robot.TURN_MULTIPLIER;
             }
 
+            /**
             //anti-tip "algorithm"
             if(antiTip){
                 currentTilt=robot.imu.getAngles()[robot.ANTI_TIP_AXIS];
@@ -81,6 +82,7 @@ public class TeleopLayout1 extends LinearOpMode {
                     forwardPower*=robot.ANTI_TIP_ADJ;
                 }
             }
+             **/
 
             //FTCLib drive code, instantiated in HWProfile
             if(robot.fieldCentric){
