@@ -93,10 +93,10 @@ public class LiftTestCTS extends OpMode {
         //FTCLib drive code, instantiated in HWProfile
  //       if(robot.fieldCentric){
             //field centric setup
- //          robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);
+           robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);
  //       }else{
             //robot centric setup
-           robot.mecanum.driveRobotCentric(strafePower,forwardPower,-turnPower, true);
+ //          robot.mecanum.driveRobotCentric(strafePower,forwardPower,-turnPower, true);
  //       }
         //END OF DRIVE CONTROL SECTION//
 
@@ -202,6 +202,10 @@ public class LiftTestCTS extends OpMode {
             offset+=800;
         }
 
+        if(!gp1.isDown(GamepadKeys.Button.X)){
+            alignAdjustReady=true;
+        }
+
         //apply lift positions
         if (bumpCount == 0) {
             liftPos = robot.LIFT_BOTTOM+offset;
@@ -215,6 +219,12 @@ public class LiftTestCTS extends OpMode {
         } else if (bumpCount == 3) {
             liftPos = robot.LIFT_HIGH+offset;
             target = robot.LIFT_HIGH+offset;
+        }
+        //adjust lift position
+        if(gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.5){
+            offset-= robot.liftAdjust;
+        }else if(gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.5){
+            offset += robot.liftAdjust;
         }
 
         //clip lift position to proper range (encoder counts in reverse so clip is negative)
