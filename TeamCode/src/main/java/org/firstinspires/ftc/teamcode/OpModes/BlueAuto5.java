@@ -95,11 +95,13 @@ public class BlueAuto5 extends OpMode{
         drive.setPoseEstimate(startPose);
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
-                .UNSTABLE_addTemporalMarkerOffset(0.65,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftTicksPerInch*3,false);})
-                .splineTo(new Vector2d(22.5,-30),Math.toRadians(120))
-                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftAdjust+robot.liftTicksPerInch*3,false);})
+                .UNSTABLE_addTemporalMarkerOffset(0.45,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftTicksPerInch*2,false);})
+
+                .splineTo(new Vector2d(25.5,-26),Math.toRadians(120))
+                .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftAdjust+robot.liftTicksPerInch*2,false);})
                 .UNSTABLE_addTemporalMarkerOffset(0.45, clawControl::openClaw)
                 .waitSeconds(0.5)
+                /*
                 .back(8)
                 .UNSTABLE_addTemporalMarkerOffset(-0.125,()->{liftTarget=clawControl.moveLiftGrab();})
                 .turn(Math.toRadians(-45))
@@ -108,10 +110,7 @@ public class BlueAuto5 extends OpMode{
 
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 .waitSeconds(0.35)
-                //.addDisplacementMarker(() -> drive.followTrajectorySequenceAsync(trajectory2))
-                .build();
 
-        trajectory2 = drive.trajectorySequenceBuilder(trajectory1.end())
                 .back(30)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(3,true);})
                 .splineToSplineHeading(new Pose2d(0,-24,Math.toRadians(45)),Math.toRadians(-120))
@@ -123,10 +122,7 @@ public class BlueAuto5 extends OpMode{
                 .splineToSplineHeading(new Pose2d(31.5,-10,Math.toRadians(0)),Math.toRadians(0))
                 .forward(24)
                 .waitSeconds(0.35)
-                //.addDisplacementMarker(() -> drive.followTrajectorySequenceAsync(trajectory3))
-                .build();
 
-        trajectory3 = drive.trajectorySequenceBuilder(trajectory2.end())
                 .back(30)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(3,true);})
                 .splineToSplineHeading(new Pose2d(0,-24,Math.toRadians(45)),Math.toRadians(-120))
@@ -138,10 +134,7 @@ public class BlueAuto5 extends OpMode{
                 .splineToSplineHeading(new Pose2d(31.5,-10,Math.toRadians(0)),Math.toRadians(0))
                 .forward(24)
                 .waitSeconds(0.35)
-                //.addDisplacementMarker(() -> drive.followTrajectorySequenceAsync(trajectory4))
-                .build();
 
-        trajectory4 = drive.trajectorySequenceBuilder(trajectory3.end())
                 .back(30)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(3,true);})
                 .splineToSplineHeading(new Pose2d(0,-24,Math.toRadians(45)),Math.toRadians(-120))
@@ -153,10 +146,7 @@ public class BlueAuto5 extends OpMode{
                 .splineToSplineHeading(new Pose2d(31.5,-10,Math.toRadians(0)),Math.toRadians(0))
                 .forward(24)
                 .waitSeconds(0.35)
-                //.addDisplacementMarker(() -> drive.followTrajectorySequenceAsync(trajectory5))
-                .build();
 
-        trajectory5 = drive.trajectorySequenceBuilder(trajectory4.end())
                 .back(30)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(3,true);})
                 .splineToSplineHeading(new Pose2d(0,-24,Math.toRadians(45)),Math.toRadians(-120))
@@ -168,10 +158,7 @@ public class BlueAuto5 extends OpMode{
                 .splineToSplineHeading(new Pose2d(31.5,-10,Math.toRadians(0)),Math.toRadians(0))
                 .forward(24)
                 .waitSeconds(0.35)
-                //.addDisplacementMarker(() -> drive.followTrajectorySequenceAsync(trajectory6))
-                .build();
 
-        trajectory6 = drive.trajectorySequenceBuilder(trajectory5.end())
                 .back(30)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(3,true);})
                 .splineToSplineHeading(new Pose2d(0,-24,Math.toRadians(45)),Math.toRadians(-120))
@@ -181,6 +168,7 @@ public class BlueAuto5 extends OpMode{
                 .UNSTABLE_addTemporalMarkerOffset(0.35, clawControl::closeClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(0,false);})
                 //.splineToSplineHeading(new Pose2d(12,-12,Math.toRadians(90)),Math.toRadians(45))
+                */
                 .build();
 
     drive.followTrajectorySequenceAsync(trajectory1);
