@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 
 import java.util.List;
 
-@TeleOp(name = "World's Best Teleop", group = "Competition")
+@TeleOp(name = "Teleop Layout 1", group = "Competition")
 //@Disabled
 public class TeleopLayout1 extends LinearOpMode {
     private final static HWProfile robot = new HWProfile();

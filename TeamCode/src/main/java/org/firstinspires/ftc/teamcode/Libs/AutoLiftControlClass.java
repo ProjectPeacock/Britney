@@ -54,7 +54,7 @@ public class AutoLiftControlClass {
         }else if(pos==2){
             return(robot.LIFT_MID);
         }else{
-            return(robot.LIFT_HIGH);
+            return(robot.LIFT_HIGH+250);
         }
     }
 
@@ -79,13 +79,13 @@ public class AutoLiftControlClass {
         armIntake();
         cyclesRun++;
         if(cyclesRun==0){
-            return(robot.stack1);
+            return -13775;
         }else if(cyclesRun==1){
-            return(robot.stack2);
+            return -9625;
         }else if(cyclesRun==2){
-            return(robot.stack3);
+            return -7100;
         }else if(cyclesRun==3){
-            return(robot.stack4);
+            return -4850;
         }else{
             return(robot.LIFT_BOTTOM);
         }

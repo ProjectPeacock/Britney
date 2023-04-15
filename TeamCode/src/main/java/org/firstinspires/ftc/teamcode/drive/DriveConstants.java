@@ -87,7 +87,7 @@ public class DriveConstants {
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
      *
      * WARNING: LearnRoadRunner.com's constant generator has capped the calculated recommended velocity at 90in/s.
-     * This message is showing because your gear ratio/motor RPM/etc. configuration, results in a recommended
+     * This message is showing because your gear ratio  /motor RPM/etc. configuration, results in a recommended
      * velocity (85% of max velocity) exceeding 90in/s.
      * (Your recommended velocity was 374.8028977002871in/s)
      * This is simply insanely fast for an FTC bot and chances are your bot cannot properly reach these speeds.
@@ -99,10 +99,10 @@ public class DriveConstants {
      * https://github.com/acmerobotics/road-runner-quickstart/issues/91
 
      */
-    public static double MAX_VEL =1000;
-    public static double MAX_ACCEL = 95;
-    public static double MAX_ANG_VEL = Math.toRadians(360);
-    public static double MAX_ANG_ACCEL = Math.toRadians(360);
+    public static double MAX_VEL =65;
+    public static double MAX_ACCEL = 60;
+    public static double MAX_ANG_VEL = 15;
+    public static double MAX_ANG_ACCEL = 15;
 
 
     public static double encoderTicksToInches(double ticks) {

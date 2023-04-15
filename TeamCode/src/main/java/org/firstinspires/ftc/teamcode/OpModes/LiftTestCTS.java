@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 
 @Config
-@TeleOp
+@TeleOp(name = "World's Best Teleop", group = "Competition")
 public class LiftTestCTS extends OpMode {
     private PIDController controller;
     public static double kP=0;

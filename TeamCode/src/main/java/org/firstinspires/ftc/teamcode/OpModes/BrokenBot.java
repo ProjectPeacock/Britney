@@ -115,6 +115,7 @@ public class BrokenBot extends LinearOpMode {
             telemetry.addData("Left Stick Y = ", gp1.getLeftY());
             telemetry.addData("Right Stick X = ", gp1.getRightX());
             telemetry.addData("Right Stick Y = ", gp1.getRightY());
+            telemetry.addData("Lift Height: ",robot.motorLiftLeft.getCurrentPosition());
             telemetry.update();
 
             // post telemetry to FTC Dashboard as well
