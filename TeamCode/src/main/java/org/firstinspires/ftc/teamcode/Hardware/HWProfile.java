@@ -19,7 +19,7 @@ public class HWProfile {
     public final boolean fieldCentric=true;
 
     //lift PID constants
-    public final double kP=0.0005;
+    public final double kP=0.0003;
     public final double kI=0;
     public final double kD=0;
     public final double kF=-0.2;
@@ -42,7 +42,7 @@ public class HWProfile {
 
     //claw positions
     public final double CLAW_OPEN =0.45;
-    public final double CLAW_CLOSE =0.2;
+    public final double CLAW_CLOSE =0.15;
     public final double CLAW_BEACON=0.4;
 
 
