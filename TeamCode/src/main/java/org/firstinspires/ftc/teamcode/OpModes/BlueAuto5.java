@@ -122,7 +122,6 @@ public class BlueAuto5 extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
-                //.UNSTABLE_addTemporalMarkerOffset(0.125,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftTicksPerInch*3-7500,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
                 .waitSeconds(0.75)
@@ -132,47 +131,7 @@ public class BlueAuto5 extends OpMode {
                     liftTarget = clawControl.moveLiftGrab();
                 })
                 .turn(Math.toRadians(-30))
-                .splineToLinearHeading(new Pose2d(36, -12, Math.toRadians(90)), Math.toRadians(90))
-                .strafeLeft(24)
-                .build();
 
-        trajectory2 = drive.trajectorySequenceBuilder(startPose)
-                .splineTo(new Vector2d(27.5, -27), Math.toRadians(140))
-                .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
-                    liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
-                })
-                //.UNSTABLE_addTemporalMarkerOffset(0.125,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftTicksPerInch*3-7500,false);})
-
-                .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
-                .waitSeconds(0.75)
-
-                .back(8)
-                .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {
-                    liftTarget = clawControl.moveLiftGrab();
-                })
-                .turn(Math.toRadians(-30))
-                .splineToLinearHeading(new Pose2d(36, -12, Math.toRadians(90)), Math.toRadians(90))
-                .build();
-
-        trajectory3 = drive.trajectorySequenceBuilder(startPose)
-                .splineTo(new Vector2d(27.5, -27), Math.toRadians(140))
-                .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
-                    liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
-                })
-                //.UNSTABLE_addTemporalMarkerOffset(0.125,()->{liftTarget=clawControl.moveLiftScore(2,robot.liftTicksPerInch*3-7500,false);})
-
-                .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
-                .waitSeconds(0.75)
-
-                .back(8)
-                .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {
-                    liftTarget = clawControl.moveLiftGrab();
-                })
-                .turn(Math.toRadians(-30))
-                .splineToLinearHeading(new Pose2d(36, -12, Math.toRadians(90)), Math.toRadians(90))
-                .strafeRight(24)
-
-                /*
                 //CYCLE 1
                 .splineToLinearHeading(new Pose2d(69,-10,Math.toRadians(0)),Math.toRadians(0))
 
@@ -184,7 +143,7 @@ public class BlueAuto5 extends OpMode {
 
                 .back(6)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(2,true);})
-                .splineToSplineHeading(new Pose2d(35.5,-13,Math.toRadians(10)),Math.toRadians(-120))
+                .splineToSplineHeading(new Pose2d(35.5,-13,Math.toRadians(30)),Math.toRadians(-170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftScore(2,-7500,true);})
                 .UNSTABLE_addTemporalMarkerOffset(0.35, clawControl::openClaw)
@@ -210,8 +169,7 @@ public class BlueAuto5 extends OpMode {
                 .waitSeconds(0.35)
                 .UNSTABLE_addTemporalMarkerOffset(0.25,()->{liftTarget=clawControl.moveLiftGrab();})
                 .splineToSplineHeading(new Pose2d(69.5,-8.5,Math.toRadians(0)),Math.toRadians(0))
-*/
-                .build();
+*/              .build();
     }
 
     public void init_loop() {
