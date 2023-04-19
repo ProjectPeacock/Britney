@@ -76,15 +76,22 @@ public class BlueSensePark extends OpMode {
     TrajectorySequence trajectory1;
     TrajectorySequence trajectory2;
     TrajectorySequence trajectory3;
+//    TrajectorySequence trajectory4;
+//    TrajectorySequence trajectory5;
+//    TrajectorySequence trajectory6;
 
     SampleMecanumDrive drive;
 
     public void init() {
         robot.init(hardwareMap);
+        telemetry.addData("hwMap ","initialized");
+        telemetry.update();
         robot.autoLight.set(-1);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        telemetry.addData("camera ","initialized");
+        telemetry.update();
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
@@ -100,17 +107,29 @@ public class BlueSensePark extends OpMode {
             }
         });
 
+        telemetry.addData("openCV ","initialized");
+        telemetry.update();
+
         clawControl = new AutoLiftControlClass(robot, myOpmode);
         //robot.servoGrabber.setPosition(robot.CLAW_CLOSE);
         robot.servoArm.setPosition(robot.SERVO_ARM_INTAKE);
         clawControl.flippersUp();
         dashboard = FtcDashboard.getInstance();
         TelemetryPacket dashTelemetry = new TelemetryPacket();
+        telemetry.addData("systems ","initialized");
+        telemetry.update();
 
         drive = new SampleMecanumDrive(hardwareMap);
+        telemetry.addData("drive ","initialized");
+        telemetry.update();
 
-        Pose2d startPose = new Pose2d(params.startPoseX, params.startPoseY, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(-params.startPoseX, params.startPoseY, Math.toRadians(90));
+//        Pose2d startPose = new Pose2d(-38.25, -63, Math.toRadians(90));
+        //Pose2d startPose = new Pose2d(0, 0, Math.toRadians(90));
+
         drive.setPoseEstimate(startPose);
+        telemetry.addData("start pose ","initialized");
+        telemetry.update();
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
@@ -123,12 +142,14 @@ public class BlueSensePark extends OpMode {
                 .waitSeconds(0.75)
 
                 .back(1)
-                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .strafeLeft(29)
+                .strafeLeft(38)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
 
+        telemetry.addData("Trajectory 1 = ", "setup");
+        telemetry.update();
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 .splineTo(new Vector2d(26, -28), Math.toRadians(130))
@@ -140,11 +161,13 @@ public class BlueSensePark extends OpMode {
                 .waitSeconds(0.75)
 
                 .back(1)
-                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 .splineToSplineHeading(new Pose2d(36,-24,Math.toRadians(90)),Math.toRadians(90))
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
+        telemetry.addData("Trajectory 2 = ", "setup");
+        telemetry.update();
 
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
@@ -156,15 +179,18 @@ public class BlueSensePark extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
                 .waitSeconds(0.75)
 
-                .back(0.25)
-                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(90))
+                .back(1)
+                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .strafeRight(38)
+                .strafeRight(32)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
+        telemetry.addData("Trajectory 3 = ", "setup");
+        telemetry.update();
     }
 
     public void init_loop() {
+        telemetry.addData("Init Loop = ", "Processing");
 
         ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
@@ -184,11 +210,15 @@ public class BlueSensePark extends OpMode {
                     switch (tagOfInterest.id) {
                         case 1:
                             parkPosition = 1;
+                            telemetry.addData("Parking Locatino = ", "1");
+
                             break;
                         case 2:
                             parkPosition = 2;
+                            telemetry.addData("Parking Locatino = ", "2");
                             break;
                         case 3:
+                            telemetry.addData("Parking Locatino = ", "3");
                             parkPosition = 3;
                             break;
                     }
