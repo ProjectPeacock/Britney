@@ -19,7 +19,7 @@ public class HWProfile {
     public final boolean fieldCentric=true;
 
     //lift PID constants
-    public final double kP=0.0003;
+    public final double kP=0.0007;
     public final double kI=0;
     public final double kD=0;
     public final double kF=-0.2;
@@ -41,8 +41,8 @@ public class HWProfile {
     public final int rearLiftMotorTol = 8;
 
     //claw positions
-    public final double CLAW_OPEN =0.45;
-    public final double CLAW_CLOSE =0.15;
+    public final double CLAW_OPEN =0.35;
+    public final double CLAW_CLOSE =0;
     public final double CLAW_BEACON=0.4;
 
 
@@ -55,14 +55,14 @@ public class HWProfile {
     public final int ANTI_TIP_AXIS=1;
 
     //lift constants
-    final public int liftAdjust=750;
+    final public int liftAdjust=375;
     final public double LIFT_POW=1;
     final public int MAX_LIFT_VALUE = -57500;
     public final int ARM_THRESHOLD =-15600;
     final public int LIFT_BOTTOM=-350;
     final public int LIFT_LOW=-21000;
-    final public int LIFT_MID=-37000;
-    final public int LIFT_HIGH=-57000;
+    final public int LIFT_MID=-35125;
+    final public int LIFT_HIGH=-50000;
 
     //final private int liftTicksPerInch= (int) 8192/4.3267;
     final public int liftTicksPerInch= 1893;

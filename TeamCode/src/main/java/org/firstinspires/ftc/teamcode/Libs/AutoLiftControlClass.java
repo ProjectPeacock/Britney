@@ -18,6 +18,7 @@ public class AutoLiftControlClass {
     public AutoLiftControlClass(HWProfile myRobot, OpMode myOpMode){
         robot = myRobot;
         opMode = myOpMode;
+        robot.liftController.setPID(0.0003,robot.kI,robot.kD);
 
     }   // close LiftControlClass constructor Method
 

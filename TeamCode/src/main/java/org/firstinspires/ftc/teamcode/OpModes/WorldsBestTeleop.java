@@ -8,10 +8,8 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
@@ -19,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 
 @Config
 @TeleOp(name = "World's Best Teleop", group = "Competition")
-public class LiftTestCTS extends OpMode {
+public class WorldsBestTeleop extends OpMode {
     private PIDController controller;
     public static double kP=0;
     public static int tolerance=0;
@@ -30,17 +28,14 @@ public class LiftTestCTS extends OpMode {
 
     private final double ticks_in_degrees = 8192/360;
 
-    private MotorEx motorLiftLeft;
-    private MotorEx motorLiftRight;
-    private MotorGroup lift;
     private int bumpCount;
     private int offset, liftPos;
     private boolean toggleReadyUp, toggleReadyDown, armOverride, alignAdjustReady, clawToggle, clawReady;
-    private boolean armOverrideReady, armToggle, antiTip=true;
+    private boolean armOverrideReady, armToggle;
     private HWProfile robot;
     private GamepadEx gp1;
     private LiftControlClass liftClass;
-    private double strafePower, forwardPower, turnPower, currentTilt, startTilt, tip;
+    private double strafePower, forwardPower, turnPower;
 //    private opMode myOpmode= this;
 
     @Override
@@ -50,14 +45,9 @@ public class LiftTestCTS extends OpMode {
         controller=new PIDController(p,i,d);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        motorLiftLeft= new MotorEx(hardwareMap, "motorLiftLeft", 8192,6000);
-        motorLiftRight= new MotorEx(hardwareMap, "motorLiftRight", 8192,6000);
-
-        lift = new MotorGroup(motorLiftLeft,motorLiftRight);
-        //lift.setRunMode(Motor.RunMode.PositionControl);
-        //lift.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);;
-        lift.resetEncoder();
         gp1 = new GamepadEx(gamepad1);
+        telemetry.addData("Ready to Run: ", "GOOD LUCK");
+        telemetry.update();
 
         liftClass = new LiftControlClass(robot);
         //lift.setPositionTolerance(tolerance);
@@ -67,40 +57,18 @@ public class LiftTestCTS extends OpMode {
     @Override
     public void loop(){
 
-
         //DRIVE CONTROL SECTION//
         //drive power input from analog sticks
         forwardPower=gp1.getLeftY();
         strafePower=gp1.getLeftX();
         if(gp1.getRightX()<0.75){
-            turnPower=Math.pow(gp1.getRightX(),2)*0.75*robot.TURN_MULTIPLIER;
+            turnPower=-Math.pow(gp1.getRightX(),2)*0.75*robot.TURN_MULTIPLIER;
         }else{
-            turnPower=gp1.getRightX()*robot.TURN_MULTIPLIER;
+            turnPower=-gp1.getRightX()*robot.TURN_MULTIPLIER;
         }
-        /**
-        //anti-tip "algorithm"
-        if(antiTip){
-            currentTilt=robot.imu.getAngles()[robot.ANTI_TIP_AXIS];
-            tip = Math.abs(currentTilt-startTilt);
-            //if robot is tipped more than tolerance, multiply drive power by adjustment
-            if(tip>robot.ANTI_TIP_TOL*2){
-                forwardPower*=-1;
-            }else if(tip>robot.ANTI_TIP_TOL){
-                forwardPower*=robot.ANTI_TIP_ADJ;
-            }
-        }
-         **/
+
         //FTCLib drive code, instantiated in HWProfile
- //       if(robot.fieldCentric){
-            //field centric setup
-           robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);
- //       }else{
-            //robot centric setup
- //          robot.mecanum.driveRobotCentric(strafePower,forwardPower,-turnPower, true);
- //       }
-        //END OF DRIVE CONTROL SECTION//
-
-
+        robot.mecanum.driveFieldCentric(strafePower,forwardPower,-gp1.getRightX()*robot.TURN_MULTIPLIER,robot.imu.getRotation2d().getDegrees()+180, true);        //END OF DRIVE CONTROL SECTION//
 
         //CLAW CONTROL SECTION//
         if(gp1.isDown(GamepadKeys.Button.A)&&clawReady){
@@ -123,9 +91,6 @@ public class LiftTestCTS extends OpMode {
             robot.servoGrabber.setPosition(robot.CLAW_BEACON);
         }
         //END OF CLAW CONTROL SECTION//
-
-
-
 
         //ARM CONTROL SECTION//
         if(gp1.isDown(GamepadKeys.Button.LEFT_STICK_BUTTON)&&armOverrideReady){
@@ -161,7 +126,6 @@ public class LiftTestCTS extends OpMode {
             liftClass.armIntake();
         }
         //END OF ARM CONTROL SECTION//
-
 
         //LIFT CONTROL SECTION//
         if(!gp1.isDown(GamepadKeys.Button.RIGHT_BUMPER)){
@@ -199,7 +163,7 @@ public class LiftTestCTS extends OpMode {
 
         //move lift down to score
         if(gp1.isDown(GamepadKeys.Button.X)&&alignAdjustReady){
-            offset+=800;
+            offset+=300;
         }
 
         if(!gp1.isDown(GamepadKeys.Button.X)){
@@ -230,25 +194,25 @@ public class LiftTestCTS extends OpMode {
         //clip lift position to proper range (encoder counts in reverse so clip is negative)
         liftPos= Range.clip(liftPos,robot.MAX_LIFT_VALUE,-50);
 
-        //lift.setPositionTolerance(tolerance);
-        //lift.setPositionCoefficient(kP);
-        int armPos = motorLiftLeft.getCurrentPosition();
+        int armPos = robot.motorLiftLeft.getCurrentPosition();
+
+        //FLIPPER CONTROL SECTION//
+        if(gp1.isDown(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
+            liftClass.flippersDown();
+        }else{
+            liftClass.flippersUp();
+        }
+        //END OF FLIPPER CONTROL SECTION//
 
         controller.setPID(p,i,d);
         double pid = controller.calculate(armPos, target);
         double ff = Math.cos(Math.toRadians((target/ticks_in_degrees)))*f;
 
-        lift.set(pid+ff);
-
-        /*
-        lift.setTargetPosition(target);
-        if(!lift.atTargetPosition()){
-            lift.set(1);
-        }else{
-            lift.set(0);
+        if(target>robot.LIFT_MID+1500){
+            robot.lift.set(Range.clip(pid+ff,-0.7,0.7));
+        }else {
+            robot.lift.set(Range.clip(pid + ff, -1, 1));
         }
-
-         */
 
         telemetry.addData("pos: ",armPos);
         telemetry.addData("target: ",target);

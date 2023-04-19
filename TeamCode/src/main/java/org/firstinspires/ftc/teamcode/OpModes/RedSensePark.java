@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -116,7 +117,7 @@ public class RedSensePark extends OpMode {
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-26.75, -23.5), Math.toRadians(50))
+                .splineTo(new Vector2d(-25.25, -27), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
@@ -133,7 +134,7 @@ public class RedSensePark extends OpMode {
 
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-26.75, -23.5), Math.toRadians(50))
+                .splineTo(new Vector2d(-25.25, -27), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
@@ -150,7 +151,7 @@ public class RedSensePark extends OpMode {
 
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-26.75, -23.5), Math.toRadians(50))
+                .splineTo(new Vector2d(-25.75, -27), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
@@ -161,7 +162,7 @@ public class RedSensePark extends OpMode {
                 .back(0.25)
                 .splineToLinearHeading(new Pose2d(-36,-36,Math.toRadians(90)),Math.toRadians(90))
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .strafeRight(26)
+                .strafeRight(32)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
     }

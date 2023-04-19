@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -75,9 +76,6 @@ public class BlueSensePark extends OpMode {
     TrajectorySequence trajectory1;
     TrajectorySequence trajectory2;
     TrajectorySequence trajectory3;
-    TrajectorySequence trajectory4;
-    TrajectorySequence trajectory5;
-    TrajectorySequence trajectory6;
 
     SampleMecanumDrive drive;
 
@@ -116,7 +114,7 @@ public class BlueSensePark extends OpMode {
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(26, -27.5), Math.toRadians(130))
+                .splineTo(new Vector2d(26, -28), Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
@@ -127,13 +125,13 @@ public class BlueSensePark extends OpMode {
                 .back(1)
                 .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(90))
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .strafeLeft(26)
+                .strafeLeft(29)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
 
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(26, -27.5), Math.toRadians(130))
+                .splineTo(new Vector2d(26, -28), Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
@@ -150,7 +148,7 @@ public class BlueSensePark extends OpMode {
 
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(26, -27.5), Math.toRadians(130))
+                .splineTo(new Vector2d(26, -28), Math.toRadians(130))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
                     liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
                 })
