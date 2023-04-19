@@ -133,9 +133,9 @@ public class RedSensePark extends OpMode {
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-24, -23), Math.toRadians(50))
+                .splineTo(new Vector2d(-24, -24), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
+                    liftTarget = clawControl.moveLiftScore(2, (int)(robot.liftTicksPerInch * 4.5), false);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
@@ -152,9 +152,9 @@ public class RedSensePark extends OpMode {
         telemetry.update();
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-24, -23), Math.toRadians(50))
+                .splineTo(new Vector2d(-24, -24), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
+                    liftTarget = clawControl.moveLiftScore(2, (int)(robot.liftTicksPerInch * 4.5), false);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
@@ -171,9 +171,9 @@ public class RedSensePark extends OpMode {
 
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .splineTo(new Vector2d(-24, -23), Math.toRadians(50))
+                .splineTo(new Vector2d(-24, -24), Math.toRadians(50))
                 .UNSTABLE_addTemporalMarkerOffset(-.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(2, robot.liftTicksPerInch * 4, false);
+                    liftTarget = clawControl.moveLiftScore(2, (int)(robot.liftTicksPerInch * 4.5), false);
                 })
 
                 .UNSTABLE_addTemporalMarkerOffset(0.65, clawControl::openClaw)
