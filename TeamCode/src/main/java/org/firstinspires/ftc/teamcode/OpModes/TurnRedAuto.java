@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Turn Red Auto", group = "Competition")
+@Autonomous(name = "Red 1+3", group = "Competition")
 public class TurnRedAuto extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
