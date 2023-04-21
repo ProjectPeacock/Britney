@@ -86,7 +86,7 @@ public class AutoLiftControlClass {
         }else if(cyclesRun==2){
             return -7100;
         }else if(cyclesRun==3){
-            return -4850;
+            return -5500;
         }else{
             return(robot.LIFT_BOTTOM);
         }

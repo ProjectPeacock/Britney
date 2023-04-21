@@ -117,19 +117,19 @@ public class TurnBlueAuto extends OpMode {
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.turn(Math.toRadians(90))
-                .lineToSplineHeading(new Pose2d(34,-40,Math.toRadians(0)))
-                .lineToSplineHeading(new Pose2d(36,-0,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(36,-40,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(40,-0,Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
                     liftTarget = clawControl.moveLiftScore(2,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .lineToSplineHeading(new Pose2d(30,-11.25,Math.toRadians(45)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(70.5,-7,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(70.75,-7,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -138,12 +138,12 @@ public class TurnBlueAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(33.5,-13.5),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(73,-8,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(75.5,-8,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -157,7 +157,7 @@ public class TurnBlueAuto extends OpMode {
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(76,-11.5,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(79,-11.5,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -165,14 +165,13 @@ public class TurnBlueAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(35,-19),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-
+                .splineTo(new Vector2d(40.5,-19),Math.toRadians(225))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+//park
                 .splineToSplineHeading(new Pose2d(44,-12,Math.toRadians(90)),Math.toRadians(45))
-                .lineToSplineHeading(new Pose2d(16,-13,Math.toRadians(90)))
-
+                .lineToSplineHeading(new Pose2d(19.5,-13,Math.toRadians(90)))
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
@@ -180,19 +179,19 @@ public class TurnBlueAuto extends OpMode {
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.turn(Math.toRadians(90))
-                .lineToSplineHeading(new Pose2d(34,-40,Math.toRadians(0)))
-                .lineToSplineHeading(new Pose2d(36,-0,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(36,-40,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(40,-0,Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
                     liftTarget = clawControl.moveLiftScore(2,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .lineToSplineHeading(new Pose2d(30,-11.25,Math.toRadians(45)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(70.5,-7,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(70.75,-7,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -201,12 +200,12 @@ public class TurnBlueAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(33.5,-13.5),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(73,-8,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(75.5,-8,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -220,7 +219,7 @@ public class TurnBlueAuto extends OpMode {
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(76,-11.5,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(79,-11.5,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -228,12 +227,12 @@ public class TurnBlueAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(35,-19),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-
-                .splineToSplineHeading(new Pose2d(48,-13,Math.toRadians(90)),Math.toRadians(45))
+                .splineTo(new Vector2d(42,-19),Math.toRadians(225))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+//park
+                .splineToSplineHeading(new Pose2d(52,-12,Math.toRadians(90)),Math.toRadians(45))
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
@@ -241,19 +240,19 @@ public class TurnBlueAuto extends OpMode {
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.turn(Math.toRadians(90))
-                .lineToSplineHeading(new Pose2d(34,-40,Math.toRadians(0)))
-                .lineToSplineHeading(new Pose2d(36,-0,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(36,-40,Math.toRadians(0)))
+                .lineToSplineHeading(new Pose2d(40,-0,Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-.25, () -> {
                     liftTarget = clawControl.moveLiftScore(2,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .lineToSplineHeading(new Pose2d(30,-11.25,Math.toRadians(45)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(70.5,-7,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(70.75,-7,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -262,12 +261,12 @@ public class TurnBlueAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(33.5,-13.5),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(73,-8,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(75.5,-8,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -281,7 +280,7 @@ public class TurnBlueAuto extends OpMode {
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(76,-11.5,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(79,-11.5,Math.toRadians(0)),Math.toRadians(10))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -289,16 +288,17 @@ public class TurnBlueAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(35,-19),Math.toRadians(225))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
-
+                .splineTo(new Vector2d(40.5,-19),Math.toRadians(225))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+//park
                 .splineToSplineHeading(new Pose2d(44,-12,Math.toRadians(90)),Math.toRadians(45))
-                .lineToSplineHeading(new Pose2d(78,-13,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(83,-13,Math.toRadians(90)))
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
+
     }
 
     public void init_loop() {

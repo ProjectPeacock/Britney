@@ -124,12 +124,12 @@ public class TurnRedAuto extends OpMode {
                 })
                 .lineToSplineHeading(new Pose2d(-33.75,-15.75,Math.toRadians(135)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-69.5,-7,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-70.0,-7,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -138,12 +138,12 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-70.5,-8,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-71.5,-8.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -151,13 +151,13 @@ public class TurnRedAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .splineTo(new Vector2d(-34,-16.5),Math.toRadians(-45))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-71.75,-11.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-72.5,-10.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -166,13 +166,14 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-34,-19),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
+//                .splineTo(new Vector2d(-44,-12),Math.toRadians(90))
                 .splineToSplineHeading(new Pose2d(-44,-12,Math.toRadians(90)),Math.toRadians(135))
-                .lineToSplineHeading(new Pose2d(-74,-13,Math.toRadians(90)))
-
+// park
+                .lineToSplineHeading(new Pose2d(-77,-13,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
@@ -186,12 +187,12 @@ public class TurnRedAuto extends OpMode {
                 })
                 .lineToSplineHeading(new Pose2d(-33.75,-15.75,Math.toRadians(135)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-69.5,-7,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-70.0,-7,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -200,12 +201,12 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-70.5,-8,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-71.5,-8.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -213,13 +214,13 @@ public class TurnRedAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .splineTo(new Vector2d(-34,-16.5),Math.toRadians(-45))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-71.75,-11.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-72.5,-10.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -228,12 +229,12 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-34,-19),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
-                .splineToSplineHeading(new Pose2d(-44,-13,Math.toRadians(90)),Math.toRadians(135))
-
+//                .splineTo(new Vector2d(-44,-12),Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(-46,-12,Math.toRadians(90)),Math.toRadians(135))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
@@ -247,12 +248,12 @@ public class TurnRedAuto extends OpMode {
                 })
                 .lineToSplineHeading(new Pose2d(-33.75,-15.75,Math.toRadians(135)))
 
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 1
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-69.5,-7,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-70.0,-7,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -261,12 +262,12 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
 
                 //CYCLE 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-70.5,-8,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-71.5,-8.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -274,13 +275,13 @@ public class TurnRedAuto extends OpMode {
                 .waitSeconds(0.6)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
-                .splineTo(new Vector2d(-33,-15),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
+                .splineTo(new Vector2d(-34,-16.5),Math.toRadians(-45))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+               .waitSeconds(0.15)
 
                 //CYCLE 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-71.75,-11.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-72.5,-10.5,Math.toRadians(180)),Math.toRadians(170))
 
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::closeClaw)
 
@@ -289,13 +290,14 @@ public class TurnRedAuto extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {liftTarget = clawControl.moveLiftScore(2,true);})
                 .back(6)
                 .splineTo(new Vector2d(-34,-19),Math.toRadians(-45))
-                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
-                .waitSeconds(0.35)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
+//                .splineTo(new Vector2d(-44,-12),Math.toRadians(90))
                 .splineToSplineHeading(new Pose2d(-44,-12,Math.toRadians(90)),Math.toRadians(135))
-                .lineToSplineHeading(new Pose2d(-16,-13,Math.toRadians(90)))
-
+// park
+                .lineToSplineHeading(new Pose2d(-18,-13,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
     }
@@ -343,6 +345,8 @@ public class TurnRedAuto extends OpMode {
 
     }
     public void start(){
+        camera.stopStreaming();
+
         if (parkPosition == 1) {
             drive.followTrajectorySequenceAsync(trajectory1);
         } else if (parkPosition == 3) {
@@ -359,7 +363,7 @@ public class TurnRedAuto extends OpMode {
 
     public void stop(){
         drive.setMotorPowers(0,0,0,0);
-        clawControl.runTo(robot.LIFT_BOTTOM);
+     //   clawControl.runTo(robot.LIFT_BOTTOM);
         requestOpModeStop();
     }
 
