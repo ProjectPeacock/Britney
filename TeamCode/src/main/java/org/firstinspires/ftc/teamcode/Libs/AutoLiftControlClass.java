@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Libs;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 
@@ -33,7 +34,11 @@ public class AutoLiftControlClass {
         double pid = robot.liftController.calculate(armPos, target);
         double ff = Math.cos(Math.toRadians((target/robot.ticks_in_degrees)))*robot.kF;
 
-        robot.lift.set(pid+ff);
+        if(target>robot.LIFT_MID+1500){
+            robot.lift.set(Range.clip(pid+ff,-0.7,0.7));
+        }else {
+            robot.lift.set(Range.clip(pid + ff, -1, 1));
+        }
     }
 
     //method for moving lift to score and retract
