@@ -123,15 +123,42 @@ public class Red15 extends OpMode {
                 })
                 .lineToSplineHeading(new Pose2d(-30,-10,Math.toRadians(225)))
                 .lineToSplineHeading(new Pose2d(-19,-8,Math.toRadians(225)))
+                .waitSeconds(0.15)
 
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
-                .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+         //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-60.0,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
+                })
+                .lineToSplineHeading(new Pose2d(-19,-8,Math.toRadians(225)))
+                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
+
+                //cycle 2
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-60.0,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
+                })
+                .lineToSplineHeading(new Pose2d(-19,-8,Math.toRadians(225)))
+                .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
+
+                //cycle 3
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-60.0,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
                 })
                 .lineToSplineHeading(new Pose2d(-19,-8,Math.toRadians(225)))
