@@ -132,7 +132,7 @@ public class Red15 extends OpMode {
                 //cycle 1
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-         //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                .splineToLinearHeading(new Pose2d(-54.0,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 .splineToLinearHeading(new Pose2d(-60.0,-16.5,Math.toRadians(180)),Math.toRadians(170),
                         SampleMecanumDrive.getVelocityConstraint(15, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
@@ -143,7 +143,7 @@ public class Red15 extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
                 })
                 .back(8.0)
-                .lineToSplineHeading(new Pose2d(-19.5,-8,Math.toRadians(225)))
+                .lineToSplineHeading(new Pose2d(-20.5,-8,Math.toRadians(225)))
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
 
                 //cycle 2
@@ -157,7 +157,7 @@ public class Red15 extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
                 })
                 .back(8.0)
-                .lineToSplineHeading(new Pose2d(-19.5,-8,Math.toRadians(225)))
+                .lineToSplineHeading(new Pose2d(-19.5,-9,Math.toRadians(225)))
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
 
                 //cycle 3
@@ -171,7 +171,7 @@ public class Red15 extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1), true);
                 })
                 .back(8.0)
-                .lineToSplineHeading(new Pose2d(-19.5,-8,Math.toRadians(225)))
+                .lineToSplineHeading(new Pose2d(-19.5,-9,Math.toRadians(225)))
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
             // park before this
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
