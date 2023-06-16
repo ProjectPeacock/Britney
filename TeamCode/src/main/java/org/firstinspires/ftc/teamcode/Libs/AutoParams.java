@@ -33,10 +33,10 @@ public class AutoParams {
     public final int liftTicksPerInch=38;
 
     //lift heights for grabbing cones from stack
-    public final int cycle1=(int)9.0*liftTicksPerInch;
-    public final int cycle2=(int)8.50*liftTicksPerInch;
-    public final int cycle3=(int)7.0*liftTicksPerInch;
-    public final int cycle4=(int)5.0*liftTicksPerInch;
+    public final int cycle1=(int)12.0*liftTicksPerInch;
+    public final int cycle2=(int)11.0*liftTicksPerInch;
+    public final int cycle3=(int)9.0*liftTicksPerInch;
+    public final int cycle4=(int)7.0*liftTicksPerInch;
     public final int cycle5=(int)0;
 
     //amount of difference between lift motor targets

@@ -66,10 +66,6 @@ public class HWProfile {
 
     //final private int liftTicksPerInch= (int) 8192/4.3267;
     final public int liftTicksPerInch= 1893;
-    final public int stack1=(int)-13*liftTicksPerInch;
-    final public int stack2=(int)-3.75*liftTicksPerInch;
-    final public int stack3=(int)-3*liftTicksPerInch;
-    final public int stack4=(int)-0.75*liftTicksPerInch;
 
     public RevColorSensorV3 sensorColor;
     //public OpticalDistanceSensor sensorDistance;

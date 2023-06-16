@@ -84,13 +84,13 @@ public class AutoLiftControlClass {
     public int moveLiftGrab(){
         armIntake();
         cyclesRun++;
-        if(cyclesRun==0){
-            return -13775;
-        }else if(cyclesRun==1){
-            return -9625;
+        if(cyclesRun==1){
+            return -12000;
         }else if(cyclesRun==2){
-            return -7100;
+            return -8500;
         }else if(cyclesRun==3){
+            return -6000;
+        }else if(cyclesRun==4){
             return -5500;
         }else{
             return(robot.LIFT_BOTTOM);

@@ -134,7 +134,7 @@ public class Red15 extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 .splineToLinearHeading(new Pose2d(-54.0,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 .splineToLinearHeading(new Pose2d(-60.0,-16.5,Math.toRadians(180)),Math.toRadians(170),
-                        SampleMecanumDrive.getVelocityConstraint(15, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -174,6 +174,8 @@ public class Red15 extends OpMode {
                 .lineToSplineHeading(new Pose2d(-19.5,-9,Math.toRadians(225)))
                 .UNSTABLE_addTemporalMarkerOffset(0.25, clawControl::openClaw)
             // park before this
+                // park
+                .lineToSplineHeading(new Pose2d(-65,-13,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
