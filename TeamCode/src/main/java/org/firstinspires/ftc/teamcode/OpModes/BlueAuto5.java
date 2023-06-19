@@ -22,7 +22,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 @Disabled
-@Autonomous(name = "Blue 1+5", group = "Competition")
+@Autonomous(name = "Blue 1+5 Old", group = "Competition")
 public class BlueAuto5 extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
