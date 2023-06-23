@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Hardware.HWProfile;
 import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 
@@ -56,6 +57,9 @@ public class WorldsBestTeleop extends OpMode {
 
     @Override
     public void loop(){
+        if(robot.sensorColor.getDistance(DistanceUnit.CM)<3&&clawToggle){
+            gamepad1.rumble(1,1,50);
+        }
 
         //DRIVE CONTROL SECTION//
         //drive power input from analog sticks

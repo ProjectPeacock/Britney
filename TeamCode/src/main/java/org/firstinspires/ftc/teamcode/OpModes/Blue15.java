@@ -88,7 +88,7 @@ public class Blue15 extends OpMode {
 
     public void init() {
         robot.init(hardwareMap);
-        robot.autoLight.set(-1);
+        //robot.autoLight.set(-1);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);

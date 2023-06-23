@@ -62,7 +62,7 @@ public class HWProfile {
     final public int LIFT_BOTTOM=-350;
     final public int LIFT_LOW=-27750;
     final public int LIFT_MID=-34750;
-    final public int LIFT_HIGH=-50750;
+    final public int LIFT_HIGH=-52750;
 
     //final private int liftTicksPerInch= (int) 8192/4.3267;
     final public int liftTicksPerInch= 1893;
