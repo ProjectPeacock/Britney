@@ -271,7 +271,7 @@ public class Blue15 extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 

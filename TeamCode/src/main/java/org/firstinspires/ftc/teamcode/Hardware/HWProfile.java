@@ -26,7 +26,7 @@ public class HWProfile {
     public final double ticks_in_degrees = 8192/360;
 
     //servo flipper positions
-    public final double SERVO_FLIPPER_DOWN=0.4;
+    public final double SERVO_FLIPPER_DOWN=0.45;
     public final double SERVO_FLIPPER_UP=0;
 
     // servo arm positions
