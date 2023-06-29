@@ -132,9 +132,9 @@ public class Blue15 extends OpMode {
                 //cycle 1
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -142,43 +142,78 @@ public class Blue15 extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 
                 //cycle 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 
                 //cycle 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 4
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 5
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
                 // park
-                .lineToSplineHeading(new Pose2d(30,-12,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(36,-12,Math.toRadians(90)))
                 .lineToSplineHeading(new Pose2d(14,-12,Math.toRadians(90)))
                 .lineToSplineHeading(new Pose2d(14,-28,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
@@ -197,9 +232,9 @@ public class Blue15 extends OpMode {
                 //cycle 1
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
                 .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -207,38 +242,73 @@ public class Blue15 extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 
                 //cycle 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 
                 //cycle 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 4
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 5
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
@@ -261,9 +331,9 @@ public class Blue15 extends OpMode {
                 //cycle 1
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
                 .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -278,31 +348,66 @@ public class Blue15 extends OpMode {
                 //cycle 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6.5,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
+                //.back(8.0)
                 .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
 
                 //cycle 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
-                .splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
-                .back(8.0)
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 4
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+
+                //cycle 5
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
+                //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
+                //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
+                .splineToLinearHeading(new Pose2d(72.5,-6,Math.toRadians(0)),Math.toRadians(10),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
+                //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
+
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
+                })
+                //.back(8.0)
+                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
                 .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
