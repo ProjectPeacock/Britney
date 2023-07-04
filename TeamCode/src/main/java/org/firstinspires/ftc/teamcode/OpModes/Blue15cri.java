@@ -120,18 +120,23 @@ public class Blue15cri extends OpMode {
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 
+                // drive forward to high junction
                 .lineToSplineHeading(new Pose2d(38,-6,Math.toRadians(90)))
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                //lift claw while rotating
+                .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
+                // rotate towards junction
                 .lineToSplineHeading(new Pose2d(48,-6,Math.toRadians(-45)))
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
                 .waitSeconds(0.15)
-                //cycle 1
+                //cycle 1 release preload
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
+                // postion claw on cone stack
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                // go to stack
+                .splineToLinearHeading(new Pose2d(72.5,-5.5,Math.toRadians(0)),Math.toRadians(10),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
@@ -141,14 +146,14 @@ public class Blue15cri extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
                 //.back(8.0)
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                .splineToLinearHeading(new Pose2d(72.5,-5.5,Math.toRadians(0)),Math.toRadians(10),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
@@ -158,14 +163,14 @@ public class Blue15cri extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
                 //.back(8.0)
-                .lineToSplineHeading(new Pose2d(44,2,Math.toRadians(-45)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                .splineToLinearHeading(new Pose2d(72.5,-5.5,Math.toRadians(0)),Math.toRadians(10),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -174,14 +179,14 @@ public class Blue15cri extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
                 //.back(8.0)
-                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 4
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                .splineToLinearHeading(new Pose2d(72.5,-5.5,Math.toRadians(0)),Math.toRadians(10),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -190,14 +195,14 @@ public class Blue15cri extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
                 //.back(8.0)
-                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 5
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //       .splineToLinearHeading(new Pose2d(-60.5,-16.5,Math.toRadians(180)),Math.toRadians(170))
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
-                .splineToLinearHeading(new Pose2d(72.5,-6.5,Math.toRadians(0)),Math.toRadians(10),
+                .splineToLinearHeading(new Pose2d(72.5,-5.5,Math.toRadians(0)),Math.toRadians(10),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
@@ -206,8 +211,8 @@ public class Blue15cri extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*1.5), true);
                 })
                 //.back(8.0)
-                .lineToSplineHeading(new Pose2d(41,0,Math.toRadians(-45)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
                 // park
@@ -312,8 +317,8 @@ public class Blue15cri extends OpMode {
                 // park before this
                 // park
                 .lineToSplineHeading(new Pose2d(36,-12,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-10,-12,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-10,-28,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(14,-12,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(14,-28,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
