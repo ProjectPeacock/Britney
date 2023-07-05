@@ -137,7 +137,7 @@ public class Red15cri extends OpMode {
                 })
                 //.back(8.0)
                 .lineToSplineHeading(new Pose2d(-19.5,-12,Math.toRadians(225)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 2
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
@@ -151,7 +151,7 @@ public class Red15cri extends OpMode {
                 })
                 //.back(8.0)
                 .lineToSplineHeading(new Pose2d(-18.5,-15,Math.toRadians(225)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 3
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
@@ -165,7 +165,7 @@ public class Red15cri extends OpMode {
                 })
                 //.back(8.0)
                 .lineToSplineHeading(new Pose2d(-19.5,-15,Math.toRadians(225)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 4
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
@@ -179,7 +179,7 @@ public class Red15cri extends OpMode {
                 })
                 //.back(8.0)
                 .lineToSplineHeading(new Pose2d(-18.5,-16,Math.toRadians(225)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
 
                 //cycle 5
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
@@ -193,12 +193,12 @@ public class Red15cri extends OpMode {
                 })
                 //.back(8.0)
                 .lineToSplineHeading(new Pose2d(-18,-17,Math.toRadians(225)))
-                .UNSTABLE_addTemporalMarkerOffset(0.0, clawControl::openClaw)
+                .UNSTABLE_addTemporalMarkerOffset(0.125, clawControl::openClaw)
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
                 // park
-                .lineToSplineHeading(new Pose2d(-60,-20,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-60,-28,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(-36,-20,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(-36,-28,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
@@ -285,8 +285,8 @@ public class Red15cri extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
                 // park before this
                 // park
-                .lineToSplineHeading(new Pose2d(-36,-20,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-36,-28,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(-12,-20,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(-12,-28,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
@@ -374,8 +374,8 @@ public class Red15cri extends OpMode {
                 // park before this
                 // park
                 .lineToSplineHeading(new Pose2d(-40,-20,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-12,-20,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-12,-28,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(14,-20,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(14,-28,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
     }

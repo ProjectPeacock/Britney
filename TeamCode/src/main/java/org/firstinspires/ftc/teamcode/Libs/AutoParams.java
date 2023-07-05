@@ -44,7 +44,9 @@ public class AutoParams {
 
     //staring pose X and Y
     public final double startPoseX=38.25;
+    public final double startPoseCRIBlueX=12;
     public final double startPoseY=-63;
+    public final double startPoseCRIBlueY=-84;
 
 //preload parameters
     //scoring position for preload on mid pole X, Y, and Heading
