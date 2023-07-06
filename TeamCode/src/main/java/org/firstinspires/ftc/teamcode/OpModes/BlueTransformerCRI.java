@@ -121,24 +121,24 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 
                 // drive forward to high junction
-                .lineToSplineHeading(new Pose2d(12,-12,Math.toRadians(90)))
+                .lineToSplineHeading(new Pose2d(0,-12,Math.toRadians(90)))
                 //lift claw while rotating
                 .UNSTABLE_addTemporalMarkerOffset(.15, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
                 // rotate towards junction
-                .lineToSplineHeading(new Pose2d(12,-12,Math.toRadians(-45)))
-                .lineToSplineHeading(new Pose2d(12,-6,Math.toRadians(-45)))
+                .lineToSplineHeading(new Pose2d(36,12,Math.toRadians(-45)))
+                .lineToSplineHeading(new Pose2d(36,-6,Math.toRadians(-45)))
                 .waitSeconds(0.15)
                 //Release preload
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
 
                 // Drive towards blue side transformer
                 // lower the claw to be prepared to grab the transformer
-                .UNSTABLE_addTemporalMarkerOffset(0.0, () -> {liftTarget = clawControl.moveLiftGrab();})
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 // drive down open area towards Blue Transformer
-                .lineToSplineHeading(new Pose2d(60,-12,Math.toRadians(-0)))
-                .splineToLinearHeading(new Pose2d(84,0,Math.toRadians(-0)),Math.toRadians(-0),
+                .lineToSplineHeading(new Pose2d(60,-12,Math.toRadians(-90)))
+                .splineToLinearHeading(new Pose2d(84,0,Math.toRadians(-90)),Math.toRadians(-90),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
