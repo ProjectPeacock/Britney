@@ -132,7 +132,7 @@ public class BlueTransformerCRI extends OpMode {
                 .waitSeconds(0.15)
                 //Release preload
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
-
+/*
                 // Drive towards blue side transformer
                 // lower the claw to be prepared to grab the transformer
                 .UNSTABLE_addTemporalMarkerOffset(0.0, () -> {liftTarget = clawControl.moveLiftGrab();})
@@ -178,6 +178,8 @@ public class BlueTransformerCRI extends OpMode {
                 .lineToSplineHeading(new Pose2d(-60,-8,Math.toRadians(90)))
                 .lineToSplineHeading(new Pose2d(-60,-12,Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
+
+ */
                 .build();
 
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
