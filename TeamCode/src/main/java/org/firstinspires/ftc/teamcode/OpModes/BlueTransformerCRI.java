@@ -125,7 +125,11 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
+<<<<<<< HEAD
                 .splineToLinearHeading(new Pose2d(44,0,Math.toRadians(-45)),Math.toRadians(90))
+=======
+                .splineToLinearHeading(new Pose2d(16.0,-23,Math.toRadians(-45)),Math.toRadians(90))
+>>>>>>> 80ad6288f5c58c3dcf711a73e55e2fdd1682c4f4
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
@@ -151,14 +155,32 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
 
                 //Head over to get the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-40.0,-4,Math.toRadians(0)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(-30.0,-2,Math.toRadians(0)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(-55.0,-2,Math.toRadians(0)),Math.toRadians(0))
 
                 //Grab the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-72.0,4,Math.toRadians(180)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(-77.0,-2,Math.toRadians(180)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(-78.5,-2,Math.toRadians(180)),Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 
+                //Score the 2nd transformer
+                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                })
+                .splineToLinearHeading(new Pose2d(-52.0,-18,Math.toRadians(135)),Math.toRadians(0))
+                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::openClaw)
+
+                //Turn around to get into scoring position
+                .splineToLinearHeading(new Pose2d(-55.0,4,Math.toRadians(0)),Math.toRadians(0))
+                .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
+                .splineToLinearHeading(new Pose2d(-55.0,-2,Math.toRadians(0)),Math.toRadians(0))
 
 
+                //Grab first transformer
+                .splineToLinearHeading(new Pose2d(0,-8,Math.toRadians(0)),Math.toRadians(0),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
+                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 /*
                 .lineToSplineHeading(new Pose2d(12,-12,Math.toRadians(90)))
                 //lift claw while rotating
