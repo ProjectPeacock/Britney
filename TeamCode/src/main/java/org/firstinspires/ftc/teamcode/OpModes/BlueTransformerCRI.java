@@ -125,7 +125,7 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-                .splineToLinearHeading(new Pose2d(16.0,-24,Math.toRadians(-45)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(44,0,Math.toRadians(-45)),Math.toRadians(90))
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
