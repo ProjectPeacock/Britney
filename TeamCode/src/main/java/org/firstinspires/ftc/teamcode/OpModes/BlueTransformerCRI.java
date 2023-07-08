@@ -125,11 +125,8 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-<<<<<<< HEAD
                 .splineToLinearHeading(new Pose2d(44,0,Math.toRadians(-45)),Math.toRadians(90))
-=======
                 .splineToLinearHeading(new Pose2d(16.0,-23,Math.toRadians(-45)),Math.toRadians(90))
->>>>>>> 80ad6288f5c58c3dcf711a73e55e2fdd1682c4f4
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
@@ -237,9 +234,8 @@ public class BlueTransformerCRI extends OpMode {
                 // park
                 .lineToSplineHeading(new Pose2d(-60,-8,Math.toRadians(90)))
                 .lineToSplineHeading(new Pose2d(-60,-12,Math.toRadians(90)))
-                .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
-
  */
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
