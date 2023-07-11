@@ -8,6 +8,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -24,8 +25,9 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Blue Auto CRI", group = "Competition")
-public class Blue15cri extends OpMode {
+@Autonomous(name = "Blue Auto CRI - OLD", group = "Competition")
+@Disabled
+public class Blue15criOld extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
     private String configFile = "autoGyroValue.txt";
@@ -130,9 +132,10 @@ public class Blue15cri extends OpMode {
                 .lineToSplineHeading(new Pose2d(48,-6,Math.toRadians(-45)))
                 .lineToSplineHeading(new Pose2d(44,0,Math.toRadians(-45)))
                 .waitSeconds(0.15)
+
                 //cycle 1 release preload
                 .UNSTABLE_addTemporalMarkerOffset(-0.25, clawControl::openClaw)
-                // postion claw on cone stack
+                // position claw on cone stack
                 .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {liftTarget = clawControl.moveLiftGrab();})
                 //.splineToLinearHeading(new Pose2d(68.0,-6,Math.toRadians(0)),Math.toRadians(10))
                 // go to stack

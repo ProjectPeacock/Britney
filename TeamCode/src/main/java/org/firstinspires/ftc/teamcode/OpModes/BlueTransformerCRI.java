@@ -24,7 +24,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Blue Auto Transformer", group = "Competition")
+@Autonomous(name = "Transformer - Blue & Red", group = "Competition")
 public class BlueTransformerCRI extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
@@ -123,12 +123,9 @@ public class BlueTransformerCRI extends OpMode {
 
 
                 // drive forward to high junction
-//                .splineToLinearHeading(new Pose2d(15.0,-60,Math.toRadians(0)),Math.toRadians(90))
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-//                .splineToLinearHeading(new Pose2d(16,0,Math.toRadians(-45)),Math.toRadians(90))
-               // .UNSTABLE_addTemporalMarkerOffset(.75, clawControl::flippersUp)
                 .splineToLinearHeading(new Pose2d(14.0,-61,Math.toRadians(90)),Math.toRadians(90))
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-45)),Math.toRadians(90))
                 .waitSeconds(0.25)
