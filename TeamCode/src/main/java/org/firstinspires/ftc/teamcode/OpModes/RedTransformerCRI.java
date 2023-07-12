@@ -24,8 +24,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Double Transformer CRI", group = "Competition")
-public class BlueTransformerCRI extends OpMode {
+@Autonomous(name = "Single Transformer CRI", group = "Competition")
+public class RedTransformerCRI extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
     private String configFile = "autoGyroValue.txt";
@@ -119,15 +119,18 @@ public class BlueTransformerCRI extends OpMode {
 
         trajectory1 = drive.trajectorySequenceBuilder(startPose)
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-               // .UNSTABLE_addTemporalMarkerOffset(0, clawControl::flippersDown)
+                // .UNSTABLE_addTemporalMarkerOffset(0, clawControl::flippersDown)
 
 
                 // drive forward to high junction
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                })
+                .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
+                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-                .splineToLinearHeading(new Pose2d(14.0,-61,Math.toRadians(90)),Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-45)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
@@ -148,52 +151,16 @@ public class BlueTransformerCRI extends OpMode {
                 //Back away from the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(0)),Math.toRadians(0))
 
-                //move to the center of the field
-                .splineToLinearHeading(new Pose2d(12.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                // release the cone
-                .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
-
-                //Head over to get the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-30.0,-4,Math.toRadians(0)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-55.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                //Grab the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-77.0,-4,Math.toRadians(180)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-79.5,-4,Math.toRadians(180)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .waitSeconds(3.0)
-
-                //Score the 2nd transformer
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
-                })
-                .splineToLinearHeading(new Pose2d(-51.5,-19,Math.toRadians(135)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::openClaw)
-
-                //Turn around to get into scoring position
-                .splineToLinearHeading(new Pose2d(-55.0,4,Math.toRadians(0)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .splineToLinearHeading(new Pose2d(-55.0,-2,Math.toRadians(0)),Math.toRadians(0))
-
-
-                //Drive towards the first transformer => position close to it
-                .splineToLinearHeading(new Pose2d(-7,-6,Math.toRadians(0)),Math.toRadians(0),
+                //move to the pre-park position
+                .splineToLinearHeading(new Pose2d(24,-4,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-
-                //Drive towards the first transformer and grab it
-                .splineToLinearHeading(new Pose2d(4,-8,Math.toRadians(0)),Math.toRadians(0),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-
                 // park
-                .splineToLinearHeading(new Pose2d(12,-8,Math.toRadians(90)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(12,-16,Math.toRadians(90)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(12,-36,Math.toRadians(90)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(12,-36,Math.toRadians(90)),Math.toRadians(0))
 
                 // stop the trajectory
-                .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
+                .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
                 .build();
 
         trajectory2 = drive.trajectorySequenceBuilder(startPose)
@@ -202,14 +169,14 @@ public class BlueTransformerCRI extends OpMode {
 
 
                 // drive forward to high junction
-//                .splineToLinearHeading(new Pose2d(15.0,-60,Math.toRadians(0)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                })
+                .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
+                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-//                .splineToLinearHeading(new Pose2d(16,0,Math.toRadians(-45)),Math.toRadians(90))
-                // .UNSTABLE_addTemporalMarkerOffset(.75, clawControl::flippersUp)
-                .splineToLinearHeading(new Pose2d(14.0,-61,Math.toRadians(90)),Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-45)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
@@ -230,67 +197,32 @@ public class BlueTransformerCRI extends OpMode {
                 //Back away from the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(0)),Math.toRadians(0))
 
-                //move to the center of the field
-                .splineToLinearHeading(new Pose2d(12.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                // release the cone
-                .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
-
-                //Head over to get the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-30.0,-4,Math.toRadians(0)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-55.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                //Grab the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-77.0,-4,Math.toRadians(180)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-79.5,-4,Math.toRadians(180)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .waitSeconds(2.5)
-
-                //Score the 2nd transformer
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
-                })
-                .splineToLinearHeading(new Pose2d(-51.5,-19,Math.toRadians(135)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::openClaw)
-
-                //Turn around to get into scoring position
-                .splineToLinearHeading(new Pose2d(-55.0,4,Math.toRadians(0)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .splineToLinearHeading(new Pose2d(-55.0,-2,Math.toRadians(0)),Math.toRadians(0))
-
-
-                //Drive towards the first transformer => position close to it
-                .splineToLinearHeading(new Pose2d(-7,-6,Math.toRadians(0)),Math.toRadians(0),
+                //move to the pre-park position
+                .splineToLinearHeading(new Pose2d(48,-4,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-
-                //Drive towards the first transformer and grab it
-                .splineToLinearHeading(new Pose2d(4,-8,Math.toRadians(0)),Math.toRadians(0),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-
                 // park
-                .lineToSplineHeading(new Pose2d(36,-4,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(36,-20,Math.toRadians(90)))
+                .splineToLinearHeading(new Pose2d(36,-36,Math.toRadians(90)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(36,-24,Math.toRadians(90)),Math.toRadians(0))
+
+                // stop the trajectory
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
 
         trajectory3 = drive.trajectorySequenceBuilder(startPose)
-
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
                 // .UNSTABLE_addTemporalMarkerOffset(0, clawControl::flippersDown)
 
 
                 // drive forward to high junction
-//                .splineToLinearHeading(new Pose2d(15.0,-60,Math.toRadians(0)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                })
+                .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
+                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
                 })
-//                .splineToLinearHeading(new Pose2d(16,0,Math.toRadians(-45)),Math.toRadians(90))
-                // .UNSTABLE_addTemporalMarkerOffset(.75, clawControl::flippersUp)
-                .splineToLinearHeading(new Pose2d(14.0,-61,Math.toRadians(90)),Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-45)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
 
                 .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
@@ -311,51 +243,19 @@ public class BlueTransformerCRI extends OpMode {
                 //Back away from the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(0)),Math.toRadians(0))
 
-                //move to the center of the field
-                .splineToLinearHeading(new Pose2d(12.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                // release the cone
-                .UNSTABLE_addTemporalMarkerOffset(-.25, clawControl::openClaw)
-
-                //Head over to get the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-30.0,-4,Math.toRadians(0)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-55.0,-4,Math.toRadians(0)),Math.toRadians(0))
-
-                //Grab the 2nd transformer
-                .splineToLinearHeading(new Pose2d(-77.0,-4,Math.toRadians(180)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(-79.5,-4,Math.toRadians(180)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-                .waitSeconds(3.0)
-
-                //Score the 2nd transformer
-                .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
-                })
-                .splineToLinearHeading(new Pose2d(-51.5,-19,Math.toRadians(135)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::openClaw)
-
-                //Turn around to get into scoring position
-                .splineToLinearHeading(new Pose2d(-55.0,4,Math.toRadians(0)),Math.toRadians(0))
-                .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
-                .splineToLinearHeading(new Pose2d(-55.0,-2,Math.toRadians(0)),Math.toRadians(0))
-
-
-                //Drive towards the first transformer => position close to it
-                .splineToLinearHeading(new Pose2d(-7,-6,Math.toRadians(0)),Math.toRadians(0),
+                //move to the pre-park position
+                .splineToLinearHeading(new Pose2d(40,-6,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-
-                //Drive towards the first transformer and grab it
-                .splineToLinearHeading(new Pose2d(4,-8,Math.toRadians(0)),Math.toRadians(0),
-                        SampleMecanumDrive.getVelocityConstraint(30, MAX_ANG_VEL, TRACK_WIDTH),
-                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-                .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
-
+                .waitSeconds(11)
                 // park
-                .lineToSplineHeading(new Pose2d(-12,-8,Math.toRadians(90)))
-                .lineToSplineHeading(new Pose2d(-12,-20,Math.toRadians(90)))
+                .splineToLinearHeading(new Pose2d(66,-6,Math.toRadians(0)),Math.toRadians(0),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
+                .splineToLinearHeading(new Pose2d(62,-36,Math.toRadians(90)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(62,-24,Math.toRadians(90)),Math.toRadians(0))
 
-
+                // stop the trajectory
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {stop();})
                 .build();
     }

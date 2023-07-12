@@ -25,7 +25,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name = "Blue Auto CRI", group = "Competition")
+@Autonomous(name = "Blue 1+5 CRI", group = "Competition")
 public class Blue15criFinal extends OpMode {
     FtcDashboard dashboard;
     TelemetryPacket dashTelemetry = new TelemetryPacket();
