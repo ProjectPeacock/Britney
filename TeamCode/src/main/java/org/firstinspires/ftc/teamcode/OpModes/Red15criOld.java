@@ -124,7 +124,7 @@ public class Red15criOld extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 //lift claw while rotating
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(-21,-8,Math.toRadians(225)),Math.toRadians(30))
                 .waitSeconds(0.1)
@@ -141,7 +141,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -161,7 +161,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -181,7 +181,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0., () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -201,7 +201,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*4), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -221,7 +221,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -243,7 +243,7 @@ public class Red15criOld extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 //lift claw while rotating
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(-21,-8,Math.toRadians(225)),Math.toRadians(30))
                 .waitSeconds(0.1)
@@ -260,7 +260,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -280,7 +280,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -300,7 +300,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0., () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -320,7 +320,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*4), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -340,7 +340,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -363,7 +363,7 @@ public class Red15criOld extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, clawControl::closeClaw)
 //lift claw while rotating
                 .UNSTABLE_addTemporalMarkerOffset(.35, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(-21,-8,Math.toRadians(225)),Math.toRadians(30))
                 .waitSeconds(0.1)
@@ -380,7 +380,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -400,7 +400,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -420,7 +420,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0., () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -440,7 +440,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*4), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)
@@ -460,7 +460,7 @@ public class Red15criOld extends OpMode {
                 //.UNSTABLE_addTemporalMarkerOffset(0.25, () -> {liftTarget = clawControl.moveLiftScore(1,false);})
 
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 //.waitSeconds(0.15)
                 .back(8.0)

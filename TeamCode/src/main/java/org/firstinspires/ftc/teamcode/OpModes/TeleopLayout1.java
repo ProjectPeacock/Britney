@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.teamcode.Libs.LiftControlClass;
 import java.util.List;
 
 @TeleOp(name = "Teleop Layout 1", group = "Competition")
+@Disabled
 //@Disabled
 public class TeleopLayout1 extends LinearOpMode {
     private final static HWProfile robot = new HWProfile();

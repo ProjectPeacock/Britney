@@ -8,6 +8,7 @@ import com.arcrobotics.ftclib.gamepad.ButtonReader;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Config
 @TeleOp(name = "Broken Bot", group = "Development")
+@Disabled
 
 public class BrokenBot extends LinearOpMode {
     private final static HWProfile robot = new HWProfile();

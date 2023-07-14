@@ -124,11 +124,11 @@ public class RedTransformerCRI extends OpMode {
 
                 // drive forward to high junction
                 .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
@@ -157,7 +157,7 @@ public class RedTransformerCRI extends OpMode {
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 // park
                 .splineToLinearHeading(new Pose2d(12,-36,Math.toRadians(90)),Math.toRadians(0))
-                .splineToLinearHeading(new Pose2d(12,-36,Math.toRadians(90)),Math.toRadians(0))
+                .splineToLinearHeading(new Pose2d(12,-24,Math.toRadians(90)),Math.toRadians(0))
 
                 // stop the trajectory
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {stop();})
@@ -170,11 +170,11 @@ public class RedTransformerCRI extends OpMode {
 
                 // drive forward to high junction
                 .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
@@ -198,7 +198,7 @@ public class RedTransformerCRI extends OpMode {
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(0)),Math.toRadians(0))
 
                 //move to the pre-park position
-                .splineToLinearHeading(new Pose2d(48,-4,Math.toRadians(0)),Math.toRadians(0),
+                .splineToLinearHeading(new Pose2d(24,-4,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 // park
@@ -216,11 +216,11 @@ public class RedTransformerCRI extends OpMode {
 
                 // drive forward to high junction
                 .UNSTABLE_addTemporalMarkerOffset(.75, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), false);
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(1.25, () -> {
-                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*3), true);
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
                 .waitSeconds(0.25)
@@ -244,10 +244,9 @@ public class RedTransformerCRI extends OpMode {
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(0)),Math.toRadians(0))
 
                 //move to the pre-park position
-                .splineToLinearHeading(new Pose2d(40,-6,Math.toRadians(0)),Math.toRadians(0),
+                .splineToLinearHeading(new Pose2d(24,-4,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
                         SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
-                .waitSeconds(11)
                 // park
                 .splineToLinearHeading(new Pose2d(66,-6,Math.toRadians(0)),Math.toRadians(0),
                         SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
