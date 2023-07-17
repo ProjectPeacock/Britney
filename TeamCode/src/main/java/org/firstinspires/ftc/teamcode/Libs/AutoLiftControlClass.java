@@ -35,7 +35,7 @@ public class AutoLiftControlClass {
         double ff = Math.cos(Math.toRadians((target/robot.ticks_in_degrees)))*robot.kF;
 
         if(target>robot.LIFT_MID+1500){
-            robot.lift.set(Range.clip(pid+ff,-0.7,0.7));
+            robot.lift.set(Range.clip(pid+ff,-0.6,0.6));
         }else {
             robot.lift.set(Range.clip(pid + ff, -1, 1));
         }
@@ -89,7 +89,7 @@ public class AutoLiftControlClass {
         }else if(cyclesRun==2){
             return -8900;
         }else if(cyclesRun==3){
-            return -5800;
+            return -6100;
         }else if(cyclesRun==4){
             return -5000;
         }else{

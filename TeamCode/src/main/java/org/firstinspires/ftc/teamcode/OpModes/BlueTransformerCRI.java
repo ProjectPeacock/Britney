@@ -127,7 +127,7 @@ public class BlueTransformerCRI extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
@@ -139,8 +139,10 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
                 //move to the center driving lane
-                .splineToLinearHeading(new Pose2d(20.0,-8,Math.toRadians(0)),Math.toRadians(90))
-
+                //.splineToLinearHeading(new Pose2d(20.0,-4,Math.toRadians(0)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(20,-4,Math.toRadians(0)),Math.toRadians(-30),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 //Head to the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(20)),Math.toRadians(0))
 
@@ -209,7 +211,7 @@ public class BlueTransformerCRI extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
@@ -221,8 +223,10 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
                 //move to the center driving lane
-                .splineToLinearHeading(new Pose2d(20.0,-8,Math.toRadians(0)),Math.toRadians(90))
-
+                //.splineToLinearHeading(new Pose2d(20.0,-4,Math.toRadians(0)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(20,-4,Math.toRadians(0)),Math.toRadians(-30),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 //Head to the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(20)),Math.toRadians(0))
 
@@ -289,7 +293,7 @@ public class BlueTransformerCRI extends OpMode {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), false);
                 })
                 .splineToLinearHeading(new Pose2d(14.0,-63,Math.toRadians(90)),Math.toRadians(90))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                     liftTarget = clawControl.moveLiftScore(3,(int)(robot.liftTicksPerInch*0), true);
                 })
                 .splineToLinearHeading(new Pose2d(16.0,-22,Math.toRadians(-55)),Math.toRadians(90))
@@ -301,8 +305,10 @@ public class BlueTransformerCRI extends OpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.5,() -> {liftTarget = clawControl.moveLiftScore(0,false);})
 
                 //move to the center driving lane
-                .splineToLinearHeading(new Pose2d(20.0,-8,Math.toRadians(0)),Math.toRadians(90))
-
+                //.splineToLinearHeading(new Pose2d(20.0,-4,Math.toRadians(0)),Math.toRadians(90))
+                .splineToLinearHeading(new Pose2d(20,-4,Math.toRadians(0)),Math.toRadians(-30),
+                        SampleMecanumDrive.getVelocityConstraint(40, MAX_ANG_VEL, TRACK_WIDTH),
+                        SampleMecanumDrive.getAccelerationConstraint(MAX_ACCEL))
                 //Head to the blue transformer
                 .splineToLinearHeading(new Pose2d(72.0,-6,Math.toRadians(20)),Math.toRadians(0))
 
